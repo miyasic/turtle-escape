@@ -6,7 +6,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ggc/presentation/sample/ball.dart';
+import 'package:ggc/presentation/sample/moving_range.dart';
 import 'package:ggc/presentation/sample/play_area.dart';
 
 enum PlayState { welcome, playing, gameOver, won }
@@ -55,56 +55,27 @@ class SampleGame extends FlameGame
 
     // デバッグモードを有効にする
     debugMode = true;
+
+    // 行動範囲を表示
+    world.add(MovingRange());
   }
 
   void startGame() {
-    if (playState == PlayState.playing) return;
-
-    // world.removeAll(world.children.query<Ball>());
-    // world.removeAll(world.children.query<Bat>());
-    // world.removeAll(world.children.query<Brick>());
+    // if (playState == PlayState.playing) return;
 
     playState = PlayState.playing;
     score.value = 0;
 
-    // ボールを作成
-    world.add(
-      Ball(
-        difficultyModifier: 1.03,
-        radius: 1600 * 0.02,
-        position: size / 2, // 画面の中心に配置
-        // ボールの初期速度と角度をランダムに設定
-        velocity: Vector2(0, 0),
-      ),
-    ); // 速度をゲームの高さの1/4にする
-
-    // world.add(
-    //   Bat(
-    //     size: Vector2(batWidth, batHeight),
-    //     cornerRadius: const Radius.circular(ballRadius / 2),
-    //     position: Vector2(width / 2, height * 0.95),
-    //   ),
-    // );
-
-    // world.addAll([
-    //   for (var i = 0; i < brickColors.length; i++)
-    //     for (var j = 1; j <= 5; j++)
-    //       Brick(
-    //         Vector2(
-    //           (i + 0.5) * brickWidth + (i + 1) * brickGutter,
-    //           (j + 2.0) * brickHeight + j * brickGutter,
-    //         ),
-    //         brickColors[i],
-    //       ),
-    // ]);
+    // 行動範囲を表示
+    world.add(MovingRange());
   }
 
-  @override
-  void onTap() {
-    super.onTap();
-    // タップしたらゲームを開始
-    startGame();
-  }
+  // @override
+  // void onTap() {
+  //   super.onTap();
+  //   // タップしたらゲームを開始
+  //   startGame();
+  // }
 
   @override // キーボードイベントを受け取る
   KeyEventResult onKeyEvent(
