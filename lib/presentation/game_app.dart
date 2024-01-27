@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:ggc/presentation/sample/overlay_screen.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,30 +31,28 @@ class _GameAppState extends State<GameApp> {
           displayColor: const Color(0xff184e77),
         ),
       ),
-      home: const Scaffold(
+      home: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: GameWidget.controlled(
               gameFactory: SampleGame.new,
-              // overlayBuilderMap: {
-              //   // overlays.addで追加した名前をキーにして、
-              //   // その名前に対応するWidgetを返す
-              //   PlayState.welcome.name: (context, game) =>
-              //       const OverlayScreen(
-              //         title: 'TAP TO PLAY',
-              //         subtitle: 'Use arrow keys or swipe',
-              //       ),
-              //   PlayState.gameOver.name: (context, game) =>
-              //       const OverlayScreen(
-              //         title: 'G A M E   O V E R',
-              //         subtitle: 'Tap to Play Again',
-              //       ),
-              //   PlayState.won.name: (context, game) => const OverlayScreen(
-              //         title: 'Y O U   W O N ! ! !',
-              //         subtitle: 'Tap to Play Again',
-              //       ),
-              // },
+              overlayBuilderMap: {
+                // overlays.addで追加した名前をキーにして、
+                // その名前に対応するWidgetを返す
+                PlayState.welcome.name: (context, game) => const OverlayScreen(
+                      title: 'TAP TO PLAY',
+                      subtitle: 'Use arrow keys or swipe',
+                    ),
+                PlayState.gameOver.name: (context, game) => const OverlayScreen(
+                      title: 'G A M E   O V E R',
+                      subtitle: 'Tap to Play Again',
+                    ),
+                PlayState.won.name: (context, game) => const OverlayScreen(
+                      title: 'Y O U   W O N ! ! !',
+                      subtitle: 'Tap to Play Again',
+                    ),
+              },
             ),
           ),
         ),

@@ -81,8 +81,8 @@ class Ball extends CircleComponent
     // ボールがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
     if (distanceFromCenter + radius > rangeRadius) {
       // MovingRangeの境界上にボールを位置させるための方向ベクトルを計算
-      final direction = newPosition - rangeCenter;
-      direction.normalize(); // 方向ベクトルを正規化
+      final direction = newPosition - rangeCenter
+        ..normalize(); // 方向ベクトルを正規化
       // MovingRangeの境界上にボールを位置させる
       return rangeCenter + direction * (rangeRadius - radius);
     }

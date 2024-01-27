@@ -30,16 +30,16 @@ class SampleGame extends FlameGame
   PlayState get playState => _playState;
   set playState(PlayState playState) {
     _playState = playState;
-    // switch (playState) {
-    //   case PlayState.welcome:
-    //   case PlayState.gameOver:
-    //   case PlayState.won:
-    //     overlays.add(playState.name);
-    //   case PlayState.playing:
-    //     overlays.remove(PlayState.welcome.name);
-    //     overlays.remove(PlayState.gameOver.name);
-    //     overlays.remove(PlayState.won.name);
-    // }
+    switch (playState) {
+      case PlayState.welcome:
+      case PlayState.gameOver:
+      case PlayState.won:
+        overlays.add(playState.name);
+      case PlayState.playing:
+        overlays.remove(PlayState.welcome.name);
+        overlays.remove(PlayState.gameOver.name);
+        overlays.remove(PlayState.won.name);
+    }
   }
 
   @override
@@ -55,13 +55,12 @@ class SampleGame extends FlameGame
 
     // デバッグモードを有効にする
     debugMode = true;
-
-    // 行動範囲を表示
-    world.add(MovingRange());
   }
 
   void startGame() {
-    // if (playState == PlayState.playing) return;
+    if (playState == PlayState.playing) {
+      return;
+    }
 
     playState = PlayState.playing;
     score.value = 0;
@@ -70,12 +69,12 @@ class SampleGame extends FlameGame
     world.add(MovingRange());
   }
 
-  // @override
-  // void onTap() {
-  //   super.onTap();
-  //   // タップしたらゲームを開始
-  //   startGame();
-  // }
+  @override
+  void onTap() {
+    super.onTap();
+    // タップしたらゲームを開始
+    startGame();
+  }
 
   @override // キーボードイベントを受け取る
   KeyEventResult onKeyEvent(
