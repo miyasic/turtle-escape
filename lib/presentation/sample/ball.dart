@@ -5,6 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:ggc/presentation/sample/moving_range.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
+import 'package:ggc/presentation/sample/trash.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 // CircleComponentを継承してBallクラスを作成
@@ -60,14 +61,11 @@ class Ball extends CircleComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     // TODO: implement onCollision
     super.onCollision(intersectionPoints, other);
-    // ここで何かと衝突した時の処理を書く
-  }
-
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    // TODO: implement onCollisionEnd
-    super.onCollisionEnd(other);
-    // ここで何かと衝突が終わった時の処理を書く
+    if (other is Trash) {
+      game.playState = PlayState.gameOver;
+      game.world.removeAll(game.world.children.query<MovingRange>());
+      game.world.removeAll(game.world.children.query<Trash>());
+    }
   }
 
   Vector2 _ensureWithinMovingRange(Vector2 newPosition) {

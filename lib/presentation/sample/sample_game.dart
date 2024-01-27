@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ggc/presentation/sample/moving_range.dart';
 import 'package:ggc/presentation/sample/play_area.dart';
+import 'package:ggc/presentation/sample/trash.dart';
 
 enum PlayState { welcome, playing, gameOver, won }
 
@@ -61,12 +62,18 @@ class SampleGame extends FlameGame
     if (playState == PlayState.playing) {
       return;
     }
+    world
+      ..removeAll(world.children.query<MovingRange>())
+      ..removeAll(world.children.query<Trash>());
 
     playState = PlayState.playing;
     score.value = 0;
 
     // 行動範囲を表示
     world.add(MovingRange());
+
+    // TODO: ゴミをランダムに複数永続的にaddする
+    world.add(Trash());
   }
 
   @override
