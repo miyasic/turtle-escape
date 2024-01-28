@@ -23,6 +23,9 @@ class MyApp extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
+      localizationsDelegates: const [
+        I18nGoogleWallet.delegate,
+      ],
       theme: lightTheme,
       darkTheme: darkTheme,
     );
