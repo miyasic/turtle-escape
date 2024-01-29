@@ -6,9 +6,9 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ggc/presentation/sample/moving_range.dart';
-import 'package:ggc/presentation/sample/play_area.dart';
-import 'package:ggc/presentation/sample/trash.dart';
+import 'package:ggc/presentation/components/moving_range.dart';
+import 'package:ggc/presentation/components/play_area.dart';
+import 'package:ggc/presentation/components/trash.dart';
 
 enum PlayState { welcome, playing, gameOver, won }
 

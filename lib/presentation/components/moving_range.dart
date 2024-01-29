@@ -2,7 +2,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/sample/ball.dart';
+import 'package:ggc/presentation/components/ball.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 
 class MovingRange extends CircleComponent with HasGameReference<SampleGame> {

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/sample/play_area.dart';
+import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 
 class Trash extends CircleComponent
@@ -51,7 +51,7 @@ class Trash extends CircleComponent
       } else if (intersectionPoints.first.x >= game.width) {
         velocity.x = -velocity.x; // 画面右端に衝突したら反射
       } else if (intersectionPoints.first.y >= game.height) {
-        velocity.y = -velocity.y;
+        velocity.y = -velocity.y; // 画面下端に衝突したら反射
       }
     }
 

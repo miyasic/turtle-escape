@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/sample/moving_range.dart';
+import 'package:ggc/presentation/components/moving_range.dart';
+import 'package:ggc/presentation/components/trash.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
-import 'package:ggc/presentation/sample/trash.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 // CircleComponentを継承してBallクラスを作成
@@ -25,27 +25,20 @@ class Ball extends CircleComponent
   @override
   void update(double dt) {
     super.update(dt);
-    // 速度を時間で割って、1秒あたりの移動距離を計算
-    // position += velocity * dt;
-    // final newPosition = position + velocity * dt;
 
-    // if (!isCollided) {
     final newPosition = position + velocity * dt;
     // MovingRangeの範囲内でボールを移動させる
     position = _ensureWithinMovingRange(newPosition);
-    // }
   }
 
   @override
   Future<void> onLoad() {
     _accelerometerSubscription = accelerometerEventStream().listen((event) {
-      // if (velocity != Vector2.zero()) {
       velocity
         // x軸のデータで横方向（左右）の移動を制御
         ..x = -event.x * 30
         // y軸のデータで縦方向（上下）の移動を制御
         ..y = event.y * 30;
-      // }
     });
 
     return super.onLoad();
