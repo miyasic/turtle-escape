@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/sample/overlay_screen.dart';
+import 'package:ggc/presentation/components/overlay_screen.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:google_fonts/google_fonts.dart';
 

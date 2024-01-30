@@ -5,7 +5,6 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/trash.dart';
@@ -81,24 +80,6 @@ class SampleGame extends FlameGame
     super.onTap();
     // タップしたらゲームを開始
     startGame();
-  }
-
-  @override // キーボードイベントを受け取る
-  KeyEventResult onKeyEvent(
-    RawKeyEvent event,
-    Set<LogicalKeyboardKey> keysPressed,
-  ) {
-    super.onKeyEvent(event, keysPressed);
-    // switch (event.logicalKey) {
-    //   case LogicalKeyboardKey.arrowLeft:
-    //     world.children.query<Bat>().first.moveBy(-batStep);
-    //   case LogicalKeyboardKey.arrowRight:
-    //     world.children.query<Bat>().first.moveBy(batStep);
-    //   case LogicalKeyboardKey.space:
-    //   case LogicalKeyboardKey.enter:
-    //     startGame();
-    // }
-    return KeyEventResult.handled;
   }
 
   @override
