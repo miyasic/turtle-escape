@@ -6,8 +6,6 @@ import 'package:ggc/util/logger.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../component/google_wallet_button.dart';
-
 class TopPage extends ConsumerWidget {
   const TopPage({super.key});
 
@@ -31,11 +29,8 @@ class TopPage extends ConsumerWidget {
             const SizedBox(
               height: 100,
             ),
-            GoogleWalletButton(
-              onPressed: () {
-                logger.d('onPressed');
-              },
-            ),
+            Text(ref.read(cityProvider)),
+            Text(ref.read(countryProvider)),
             ref.watch(counterProvider).when(
               data: (value) {
                 return Text(value.toString());
