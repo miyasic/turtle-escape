@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../component/google_wallet_button.dart';
+
 class OverlayScreen extends StatelessWidget {
   const OverlayScreen({
     super.key,
     required this.title,
     required this.subtitle,
+    this.child,
   });
 
   final String title;
   final String subtitle;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,7 @@ class OverlayScreen extends StatelessWidget {
               .fadeIn(duration: 1.seconds)
               .then()
               .fadeOut(duration: 1.seconds),
+          child ?? const SizedBox.shrink(),
         ],
       ),
     );

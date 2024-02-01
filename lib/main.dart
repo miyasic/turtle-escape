@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_google_wallet/generated/l10n.dart';
 import 'package:ggc/presentation/game_app.dart';
 import 'package:ggc/router.dart';
 import 'package:ggc/scaffold_messenger.dart';
