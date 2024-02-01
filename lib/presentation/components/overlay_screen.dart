@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../component/google_wallet_button.dart';
-
 class OverlayScreen extends StatelessWidget {
   const OverlayScreen({
     super.key,
