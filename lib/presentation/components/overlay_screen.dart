@@ -36,6 +36,7 @@ class OverlayScreen extends StatelessWidget {
               .fadeIn(duration: 1.seconds)
               .then()
               .fadeOut(duration: 1.seconds),
+          const SizedBox(height: 16),
           child ?? const SizedBox.shrink(),
         ],
       ),
