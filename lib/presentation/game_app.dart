@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:ggc/presentation/component/google_wallet_button.dart';
 import 'package:ggc/presentation/components/overlay_screen.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,9 +45,12 @@ class _GameAppState extends State<GameApp> {
                       title: 'TAP TO PLAY',
                       subtitle: 'Use arrow keys or swipe',
                     ),
-                PlayState.gameOver.name: (context, game) => const OverlayScreen(
+                PlayState.gameOver.name: (context, game) => OverlayScreen(
                       title: 'G A M E   O V E R',
                       subtitle: 'Tap to Play Again',
+                      child: GoogleWalletButton(
+                        onPressed: () {},
+                      ),
                     ),
                 PlayState.won.name: (context, game) => const OverlayScreen(
                       title: 'Y O U   W O N ! ! !',

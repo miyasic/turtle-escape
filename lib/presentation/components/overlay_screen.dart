@@ -6,10 +6,12 @@ class OverlayScreen extends StatelessWidget {
     super.key,
     required this.title,
     required this.subtitle,
+    this.child,
   });
 
   final String title;
   final String subtitle;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,8 @@ class OverlayScreen extends StatelessWidget {
               .fadeIn(duration: 1.seconds)
               .then()
               .fadeOut(duration: 1.seconds),
+          const SizedBox(height: 16),
+          child ?? const SizedBox.shrink(),
         ],
       ),
     );
