@@ -11,9 +11,9 @@ import 'package:sensors_plus/sensors_plus.dart';
 // CircleComponentを継承してBallクラスを作成
 // CollisionCallbacks = 衝突時のコールバックを受け取る
 // HasGameReference = ゲームの参照
-class Ball extends CircleComponent
+class Ball extends RectangleComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
-  Ball() : super(radius: 10, paint: Paint()..color = Colors.white) {
+  Ball() : super(size: Vector2(20, 20), paint: Paint()..color = Colors.white) {
     // 衝突判定用のヒットボックスを追加
     add(CircleHitbox());
   }
@@ -32,7 +32,7 @@ class Ball extends CircleComponent
   }
 
   @override
-  Future<void> onLoad() {
+  FutureOr<void> onLoad() {
     _accelerometerSubscription = accelerometerEventStream().listen((event) {
       velocity
         // x軸のデータで横方向（左右）の移動を制御
@@ -40,7 +40,6 @@ class Ball extends CircleComponent
         // y軸のデータで縦方向（上下）の移動を制御
         ..y = event.y * 30;
     });
-
     return super.onLoad();
   }
 
@@ -70,12 +69,12 @@ class Ball extends CircleComponent
     final distanceFromCenter = newPosition.distanceTo(rangeCenter);
 
     // ボールがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
-    if (distanceFromCenter + radius > rangeRadius) {
+    if (distanceFromCenter + 10 > rangeRadius) {
       // MovingRangeの境界上にボールを位置させるための方向ベクトルを計算
       final direction = newPosition - rangeCenter
         ..normalize(); // 方向ベクトルを正規化
       // MovingRangeの境界上にボールを位置させる
-      return rangeCenter + direction * (rangeRadius - radius);
+      return rangeCenter + direction * (rangeRadius - 10);
     }
 
     // ボールがMovingRangeの範囲内にある場合は、新しい位置をそのまま使用

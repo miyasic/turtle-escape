@@ -12,7 +12,6 @@ class Trash extends CircleComponent
       : super(
           radius: 4,
           paint: Paint()..color = Colors.white,
-          position: Vector2(0, 0),
         ) {
     // 衝突判定用のヒットボックスを追加
     add(CircleHitbox());
@@ -28,12 +27,53 @@ class Trash extends CircleComponent
 
   @override
   Future<void> onLoad() {
-    // TODO: Ballに向かって移動させる
-
     final rand = math.Random();
+    final screenWidth = game.size.x - 10;
+    final screenHeight = game.size.y - 10;
+    final centerX = screenWidth / 2;
+    final centerY = screenHeight / 2;
 
-    // ボールの初期位置をランダムに設定
-    velocity = Vector2(rand.nextDouble() - 0.5 * 35, height * 30);
+    // 画面の端からスタートするように位置を設定
+    double startX;
+    double startY;
+    switch (rand.nextInt(4)) {
+      // 0: 上, 1: 下, 2: 左, 3: 右
+      case 0:
+        startX = rand.nextDouble() * screenWidth;
+        startY = 0;
+
+      case 1:
+        startX = rand.nextDouble() * screenWidth;
+        startY = screenHeight;
+
+      case 2:
+        startX = 0;
+        startY = rand.nextDouble() * screenHeight;
+
+      default: // case 3:
+        startX = screenWidth;
+        startY = rand.nextDouble() * screenHeight;
+
+        break;
+    }
+    position = Vector2(startX, startY);
+
+    // game内のBallの位置を取得
+    final ball = game.findBallFromMovingRange();
+    Vector2 targetVector;
+    if (ball != null) {
+      // ボールに向かう速度ベクトルを計算
+      targetVector = Vector2(
+        ball.position.x + 80 - startX, // 80はmovingRangeのx座標
+        ball.position.y + 220 - startY, // 220はmovingRangeのy座標
+      );
+    } else {
+      // 中央に向かう速度ベクトルを計算
+      targetVector = Vector2(centerX - startX, centerY - startY);
+    }
+
+    targetVector.normalize(); // 単位ベクトルにする
+    velocity = targetVector * (200 + rand.nextDouble() * 20); // 速さをランダムに設定
 
     return super.onLoad();
   }
@@ -44,23 +84,14 @@ class Trash extends CircleComponent
     super.onCollision(intersectionPoints, other);
     // ここで何かと衝突した時の処理を書く
     if (other is PlayArea) {
-      if (intersectionPoints.first.y <= 0) {
-        velocity.y = -velocity.y; // 画面上端に衝突したら反射
-      } else if (intersectionPoints.first.x <= 0) {
-        velocity.x = -velocity.x; // 画面左端に衝突したら反射
-      } else if (intersectionPoints.first.x >= game.width) {
-        velocity.x = -velocity.x; // 画面右端に衝突したら反射
-      } else if (intersectionPoints.first.y >= game.height) {
-        velocity.y = -velocity.y; // 画面下端に衝突したら反射
-      }
+      removeFromParent();
     }
+  }
 
-    @override
-    // ignore: unused_element
-    void onCollisionEnd(PositionComponent other) {
-      // TODO: implement onCollisionEnd
-      super.onCollisionEnd(other);
-      // ここで何かと衝突が終わった時の処理を書く
-    }
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    // TODO: implement onCollisionEnd
+    super.onCollisionEnd(other);
+    // ここで何かと衝突が終わった時の処理を書く
   }
 }

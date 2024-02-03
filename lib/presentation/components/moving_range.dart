@@ -23,7 +23,11 @@ class MovingRange extends CircleComponent with HasGameReference<SampleGame> {
     final ball = Ball()
       ..position = size / 2 // PlayAreaの中心
       ..anchor = Anchor.center
-      ..velocity = Vector2(100, 150); // 初期速度を設定
+      ..velocity = Vector2(0, 0); // 初期速度を設定
     add(ball);
+  }
+
+  Ball? findBall() {
+    return firstChild<Ball>();
   }
 }

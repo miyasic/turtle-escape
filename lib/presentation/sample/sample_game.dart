@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:collection/collection.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:ggc/presentation/components/ball.dart';
 import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/trash.dart';
@@ -34,6 +36,8 @@ class SampleGame extends FlameGame
       case PlayState.welcome:
       case PlayState.gameOver:
       case PlayState.won:
+        world.removeAll(world.children.query<Trash>());
+        world.removeAll(world.children.query<TimerComponent>());
         overlays.add(playState.name);
       case PlayState.playing:
         overlays.remove(PlayState.welcome.name);
@@ -69,9 +73,27 @@ class SampleGame extends FlameGame
     score.value = 0;
 
     // 行動範囲を表示
-    world
-      ..add(MovingRange())
-      ..add(Trash()); // TODO: ゴミをランダムに複数永続的にaddする
+    world.add(MovingRange());
+
+    addTrash();
+
+    // 1秒ごとにゴミを追加
+    world.add(
+      TimerComponent(
+        period: 1,
+        repeat: true,
+        onTick: () {
+          if (playState == PlayState.playing) {
+            addTrash();
+          }
+        },
+      ),
+    );
+  }
+
+  void addTrash() {
+    final trash = Trash();
+    world.add(trash);
   }
 
   @override
@@ -83,4 +105,13 @@ class SampleGame extends FlameGame
 
   @override
   Color backgroundColor() => const Color(0xfff2e8cf);
+
+  Ball? findBallFromMovingRange() {
+    final movingRange = world.children
+        .firstWhereOrNull((element) => element is MovingRange) as MovingRange?;
+    if (movingRange == null) {
+      return null;
+    }
+    return movingRange.findBall();
+  }
 }
