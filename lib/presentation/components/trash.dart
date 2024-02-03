@@ -56,6 +56,7 @@ class Trash extends CircleComponent
     }
 
     @override
+    // ignore: unused_element
     void onCollisionEnd(PositionComponent other) {
       // TODO: implement onCollisionEnd
       super.onCollisionEnd(other);
