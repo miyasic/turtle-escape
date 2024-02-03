@@ -77,6 +77,7 @@ class SampleGame extends FlameGame
 
     addTrash();
 
+    // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
     // 1秒ごとにゴミを追加
     world.add(
       TimerComponent(
