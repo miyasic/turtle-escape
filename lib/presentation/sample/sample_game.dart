@@ -69,10 +69,9 @@ class SampleGame extends FlameGame
     score.value = 0;
 
     // 行動範囲を表示
-    world.add(MovingRange());
-
-    // TODO: ゴミをランダムに複数永続的にaddする
-    world.add(Trash());
+    world
+      ..add(MovingRange())
+      ..add(Trash()); // TODO: ゴミをランダムに複数永続的にaddする
   }
 
   @override
