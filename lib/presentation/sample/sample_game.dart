@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/components/ball.dart';
+import 'package:ggc/presentation/components/fish.dart';
 import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/trash.dart';
@@ -106,12 +106,12 @@ class SampleGame extends FlameGame
   @override
   Color backgroundColor() => const Color(0xfff2e8cf);
 
-  Ball? findBallFromMovingRange() {
+  Fish? findFishFromMovingRange() {
     final movingRange = world.children
         .firstWhereOrNull((element) => element is MovingRange) as MovingRange?;
     if (movingRange == null) {
       return null;
     }
-    return movingRange.findBall();
+    return movingRange.findFish();
   }
 }
