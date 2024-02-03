@@ -4,3 +4,7 @@ include: package:pedantic_mono/analysis_options.yaml
 analyzer:
   plugins:
     - custom_lint
+
+linter:
+  rules:
+    flutter_style_todos: false
