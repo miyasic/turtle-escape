@@ -1,0 +1,22 @@
+# Node.jsの公式イメージをベースイメージとして使用
+FROM node:16
+
+# アプリケーションのソースコードを含むディレクトリを作成
+WORKDIR /usr/src/app
+
+# package.jsonとpackage-lock.jsonをコピー
+COPY package*.json ./
+
+# アプリケーションの依存関係をインストール
+RUN npm install
+# 本番環境用の依存関係のみをインストールする場合は以下を使用
+# RUN npm ci --only=production
+
+# アプリケーションのソースコードをコピー
+COPY . .
+
+# アプリケーションがリッスンするポート番号を指定
+EXPOSE 3000
+
+# アプリケーションを起動
+CMD ["node", "index.js"]
