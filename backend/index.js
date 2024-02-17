@@ -5,18 +5,19 @@ const { GoogleAuth } = require('google-auth-library');
 require('dotenv').config();
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const secretClient = new SecretManagerServiceClient();
+const secretName = 'projects/25571401505/secrets/PRIVATE_KEY/versions/1';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const isRunningInCloud = process.env.RUNNING_IN_CLOUD === 'true';
 
 // ミドルウェアの設定
 app.use(bodyParser.json());
 
 app.post('/generate-jwt', async (req, res) => {
     const genericObject = req.body; // Flutter アプリから送られてくる JSON
-    const secretName = 'projects/25571401505/secrets/PRIVATE_KEY/versions/1';
+    
     const private_key = await accessSecret(secretName);
-    // const private_key = process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
 
     const credentials = {
         client_email: 'wallet@ggc-412221.iam.gserviceaccount.com', // 環境変数から取得するか、直接指定
@@ -45,11 +46,13 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-// 秘密情報を取得する関数
 async function accessSecret(secretName) {
-    const [version] = await secretClient.accessSecretVersion({name: secretName});
-    const payload = version.payload.data.toString('utf8');
-    return payload.replace(/\\n/g, '\n');
+    if(isRunningInCloud) {
+        const [version] = await secretClient.accessSecretVersion({name: secretName});
+        const payload = version.payload.data.toString('utf8');
+        return payload.replace(/\\n/g, '\n');
+    }
+    return process.env.PRIVATE_KEY.replace(/\\n/g, '\n');
   }
 
 // 検証用のエンドポイント
