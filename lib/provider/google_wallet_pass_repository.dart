@@ -11,8 +11,10 @@ GoogleWalletPassRepository googleWalletPassRepository(
 
 class GoogleWalletPassRepository {
   final Dio _dio = Dio();
+  // final String _endpoint =
+  // 'http://10.0.2.2:3000/generate-jwt'; // android emulatorの場合
   final String _endpoint =
-      'http://10.0.2.2:3000/generate-jwt'; // android emulatorの場合
+      'https://backend-6i6ykk4rjq-an.a.run.app/generate-jwt'; // 実機&GCRサーバーの場合
 
   Future<String?> generateJwt(Map<String, dynamic> requestData) async {
     final response =
