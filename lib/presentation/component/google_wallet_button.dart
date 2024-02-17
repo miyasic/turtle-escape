@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ggc/model/wallet_pass.dart';
 import 'package:ggc/provider/google_wallet.dart';
@@ -23,7 +22,7 @@ class GoogleWalletButton extends ConsumerWidget {
       onTap: () async {
         await googleWallet.initWalletClient();
         try {
-          final walletPass = WalletPass();
+          const walletPass = WalletPass();
           final jwt = await googleWalletPassRepository.generateJwt(
             walletPass.toJson(),
           );
