@@ -22,16 +22,23 @@ class GoogleWalletButton extends ConsumerWidget {
       onTap: () async {
         await googleWallet.initWalletClient();
         try {
-          final id = '3388000000022312255.codelab_object10';
+          final id = '3388000000022312255.codelab_object12';
           final classId = '3388000000022312255.codelab_class2';
           final cardTitle = DefalutValueWrapper.defaultValue(value: 'I Got it');
-          final colorCode = '#0000ff';
+          final colorCode = '#00ffff';
+          final HeroImage heroImage =
+              HeroImage.fromUri('https://picsum.photos/600/200');
+          final Barcode barcode = Barcode.qrCode(
+              value: 'https://www.unicef.or.jp/kodomo/sdgs/17goals/14-sea/');
           final walletPass = WalletPass(
             cardTitle: cardTitle,
             id: id,
             classId: classId,
             hexBackgroundColor: colorCode,
+            heroImage: heroImage,
+            barcode: barcode,
           );
+
           final jwt = await googleWalletPassRepository.generateJwt(
             walletPass.toJson(),
           );

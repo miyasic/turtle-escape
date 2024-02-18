@@ -92,6 +92,11 @@ class Barcode with _$Barcode {
     required String value,
   }) = _Barcode;
 
+  factory Barcode.qrCode({required String value}) => Barcode(
+        type: 'QR_CODE',
+        value: value,
+      );
+
   factory Barcode.fromJson(Map<String, dynamic> json) =>
       _$BarcodeFromJson(json);
 }
@@ -107,6 +112,10 @@ class HeroImage with _$HeroImage {
     )
     SourceUri sourceUri,
   }) = _HeroImage;
+
+  factory HeroImage.fromUri(String uri) => HeroImage(
+        sourceUri: SourceUri(uri: uri),
+      );
 
   factory HeroImage.fromJson(Map<String, dynamic> json) =>
       _$HeroImageFromJson(json);
