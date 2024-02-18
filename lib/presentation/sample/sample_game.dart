@@ -93,6 +93,7 @@ class SampleGame extends FlameGame
   }
 
   void addTrash() {
+    score.value += 1;
     final trash = Trash();
     world.add(trash);
   }

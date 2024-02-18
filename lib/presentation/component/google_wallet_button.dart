@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ggc/model/wallet_pass.dart';
 import 'package:ggc/provider/google_wallet.dart';
 import 'package:ggc/provider/google_wallet_pass_repository.dart';
@@ -9,8 +10,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../gen/assets.gen.dart';
 
 class GoogleWalletButton extends ConsumerWidget {
-  const GoogleWalletButton({super.key});
-
+  const GoogleWalletButton({required this.score, super.key});
+  final String score;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final googleWallet = ref.watch(googleWalletProvider);
@@ -20,9 +21,10 @@ class GoogleWalletButton extends ConsumerWidget {
       onTap: () async {
         await googleWallet.initWalletClient();
         try {
-          final id = '3388000000022312255.codelab_object12';
+          final id = '3388000000022312255.codelab_object14';
           final classId = '3388000000022312255.codelab_class2';
-          final cardTitle = DefalutValueWrapper.defaultValue(value: 'I Got it');
+          final cardTitle =
+              DefalutValueWrapper.defaultValue(value: 'Your score is $score');
           final colorCode = '#00ffff';
           final HeroImage heroImage =
               HeroImage.fromUri('https://picsum.photos/600/200');
