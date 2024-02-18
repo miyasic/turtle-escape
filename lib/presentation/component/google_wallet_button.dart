@@ -22,11 +22,10 @@ class GoogleWalletButton extends ConsumerWidget {
       onTap: () async {
         await googleWallet.initWalletClient();
         try {
-          final id = '3388000000022312255.codelab_object9';
+          final id = '3388000000022312255.codelab_object10';
           final classId = '3388000000022312255.codelab_class2';
-          final cardTitle = DefalutValueWrapper(
-              defaultValue: DefaultValue(value: 'I Got it'));
-          final colorCode = '#00ff00';
+          final cardTitle = DefalutValueWrapper.defaultValue(value: 'I Got it');
+          final colorCode = '#0000ff';
           final walletPass = WalletPass(
             cardTitle: cardTitle,
             id: id,

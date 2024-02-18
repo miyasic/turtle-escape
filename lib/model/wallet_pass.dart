@@ -63,6 +63,13 @@ class DefalutValueWrapper with _$DefalutValueWrapper {
     DefaultValue? defaultValue,
   }) = _DefalutValueWrapper;
 
+  factory DefalutValueWrapper.defaultValue({
+    required String value,
+  }) =>
+      DefalutValueWrapper(
+        defaultValue: DefaultValue(value: value),
+      );
+
   factory DefalutValueWrapper.fromJson(Map<String, dynamic> json) =>
       _$DefalutValueWrapperFromJson(json);
 }
