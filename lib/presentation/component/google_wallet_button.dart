@@ -9,9 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../gen/assets.gen.dart';
 
 class GoogleWalletButton extends ConsumerWidget {
-  const GoogleWalletButton({required this.onPressed, super.key});
-
-  final VoidCallback onPressed;
+  const GoogleWalletButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

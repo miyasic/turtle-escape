@@ -48,9 +48,7 @@ class _GameAppState extends State<GameApp> {
                 PlayState.gameOver.name: (context, game) => OverlayScreen(
                       title: 'G A M E   O V E R',
                       subtitle: 'Tap to Play Again',
-                      child: GoogleWalletButton(
-                        onPressed: () {},
-                      ),
+                      child: GoogleWalletButton(),
                     ),
                 PlayState.won.name: (context, game) => const OverlayScreen(
                       title: 'Y O U   W O N ! ! !',
