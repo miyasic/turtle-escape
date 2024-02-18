@@ -25,9 +25,9 @@ mixin _$WalletPass {
   String get genericType => throw _privateConstructorUsedError;
   String get hexBackgroundColor => throw _privateConstructorUsedError;
   Logo get logo => throw _privateConstructorUsedError;
-  DefaultValue get cardTitle => throw _privateConstructorUsedError;
-  DefaultValue get subheader => throw _privateConstructorUsedError;
-  DefaultValue get header => throw _privateConstructorUsedError;
+  DefalutValueWrapper get cardTitle => throw _privateConstructorUsedError;
+  DefalutValueWrapper get subheader => throw _privateConstructorUsedError;
+  DefalutValueWrapper get header => throw _privateConstructorUsedError;
   Barcode get barcode => throw _privateConstructorUsedError;
   HeroImage get heroImage => throw _privateConstructorUsedError;
   List<TextModulesData> get textModulesData =>
@@ -51,17 +51,17 @@ abstract class $WalletPassCopyWith<$Res> {
       String genericType,
       String hexBackgroundColor,
       Logo logo,
-      DefaultValue cardTitle,
-      DefaultValue subheader,
-      DefaultValue header,
+      DefalutValueWrapper cardTitle,
+      DefalutValueWrapper subheader,
+      DefalutValueWrapper header,
       Barcode barcode,
       HeroImage heroImage,
       List<TextModulesData> textModulesData});
 
   $LogoCopyWith<$Res> get logo;
-  $DefaultValueCopyWith<$Res> get cardTitle;
-  $DefaultValueCopyWith<$Res> get subheader;
-  $DefaultValueCopyWith<$Res> get header;
+  $DefalutValueWrapperCopyWith<$Res> get cardTitle;
+  $DefalutValueWrapperCopyWith<$Res> get subheader;
+  $DefalutValueWrapperCopyWith<$Res> get header;
   $BarcodeCopyWith<$Res> get barcode;
   $HeroImageCopyWith<$Res> get heroImage;
 }
@@ -115,15 +115,15 @@ class _$WalletPassCopyWithImpl<$Res, $Val extends WalletPass>
       cardTitle: null == cardTitle
           ? _value.cardTitle
           : cardTitle // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       subheader: null == subheader
           ? _value.subheader
           : subheader // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       header: null == header
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       barcode: null == barcode
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
@@ -149,24 +149,24 @@ class _$WalletPassCopyWithImpl<$Res, $Val extends WalletPass>
 
   @override
   @pragma('vm:prefer-inline')
-  $DefaultValueCopyWith<$Res> get cardTitle {
-    return $DefaultValueCopyWith<$Res>(_value.cardTitle, (value) {
+  $DefalutValueWrapperCopyWith<$Res> get cardTitle {
+    return $DefalutValueWrapperCopyWith<$Res>(_value.cardTitle, (value) {
       return _then(_value.copyWith(cardTitle: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DefaultValueCopyWith<$Res> get subheader {
-    return $DefaultValueCopyWith<$Res>(_value.subheader, (value) {
+  $DefalutValueWrapperCopyWith<$Res> get subheader {
+    return $DefalutValueWrapperCopyWith<$Res>(_value.subheader, (value) {
       return _then(_value.copyWith(subheader: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DefaultValueCopyWith<$Res> get header {
-    return $DefaultValueCopyWith<$Res>(_value.header, (value) {
+  $DefalutValueWrapperCopyWith<$Res> get header {
+    return $DefalutValueWrapperCopyWith<$Res>(_value.header, (value) {
       return _then(_value.copyWith(header: value) as $Val);
     });
   }
@@ -202,9 +202,9 @@ abstract class _$$WalletPassImplCopyWith<$Res>
       String genericType,
       String hexBackgroundColor,
       Logo logo,
-      DefaultValue cardTitle,
-      DefaultValue subheader,
-      DefaultValue header,
+      DefalutValueWrapper cardTitle,
+      DefalutValueWrapper subheader,
+      DefalutValueWrapper header,
       Barcode barcode,
       HeroImage heroImage,
       List<TextModulesData> textModulesData});
@@ -212,11 +212,11 @@ abstract class _$$WalletPassImplCopyWith<$Res>
   @override
   $LogoCopyWith<$Res> get logo;
   @override
-  $DefaultValueCopyWith<$Res> get cardTitle;
+  $DefalutValueWrapperCopyWith<$Res> get cardTitle;
   @override
-  $DefaultValueCopyWith<$Res> get subheader;
+  $DefalutValueWrapperCopyWith<$Res> get subheader;
   @override
-  $DefaultValueCopyWith<$Res> get header;
+  $DefalutValueWrapperCopyWith<$Res> get header;
   @override
   $BarcodeCopyWith<$Res> get barcode;
   @override
@@ -270,15 +270,15 @@ class __$$WalletPassImplCopyWithImpl<$Res>
       cardTitle: null == cardTitle
           ? _value.cardTitle
           : cardTitle // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       subheader: null == subheader
           ? _value.subheader
           : subheader // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       header: null == header
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
-              as DefaultValue,
+              as DefalutValueWrapper,
       barcode: null == barcode
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
@@ -304,9 +304,12 @@ class _$WalletPassImpl implements _WalletPass {
       this.genericType = 'GENERIC_TYPE_UNSPECIFIED',
       this.hexBackgroundColor = '#4285f4',
       this.logo = const Logo(),
-      this.cardTitle = const DefaultValue(value: 'Are you ready?'),
-      this.subheader = const DefaultValue(value: 'Save the earth!'),
-      this.header = const DefaultValue(value: 'Global Gamers Challenge!!'),
+      this.cardTitle =
+          const CardTitle(defaultValue: DefaultValue(value: 'Are you ready?')),
+      this.subheader =
+          const Subheader(defaultValue: DefaultValue(value: 'Save the earth!')),
+      this.header = const Header(
+          defaultValue: DefaultValue(value: 'Global Gamers Challenge!!')),
       this.barcode =
           const Barcode(value: '3388000000022312255.codelab_object3'),
       this.heroImage = const HeroImage(),
@@ -336,13 +339,13 @@ class _$WalletPassImpl implements _WalletPass {
   final Logo logo;
   @override
   @JsonKey()
-  final DefaultValue cardTitle;
+  final DefalutValueWrapper cardTitle;
   @override
   @JsonKey()
-  final DefaultValue subheader;
+  final DefalutValueWrapper subheader;
   @override
   @JsonKey()
-  final DefaultValue header;
+  final DefalutValueWrapper header;
   @override
   @JsonKey()
   final Barcode barcode;
@@ -424,9 +427,9 @@ abstract class _WalletPass implements WalletPass {
       final String genericType,
       final String hexBackgroundColor,
       final Logo logo,
-      final DefaultValue cardTitle,
-      final DefaultValue subheader,
-      final DefaultValue header,
+      final DefalutValueWrapper cardTitle,
+      final DefalutValueWrapper subheader,
+      final DefalutValueWrapper header,
       final Barcode barcode,
       final HeroImage heroImage,
       final List<TextModulesData> textModulesData}) = _$WalletPassImpl;
@@ -445,11 +448,11 @@ abstract class _WalletPass implements WalletPass {
   @override
   Logo get logo;
   @override
-  DefaultValue get cardTitle;
+  DefalutValueWrapper get cardTitle;
   @override
-  DefaultValue get subheader;
+  DefalutValueWrapper get subheader;
   @override
-  DefaultValue get header;
+  DefalutValueWrapper get header;
   @override
   Barcode get barcode;
   @override
@@ -743,6 +746,162 @@ abstract class _SourceUri implements SourceUri {
   @override
   @JsonKey(ignore: true)
   _$$SourceUriImplCopyWith<_$SourceUriImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+DefalutValueWrapper _$DefalutValueWrapperFromJson(Map<String, dynamic> json) {
+  return _DefalutValueWrapper.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DefalutValueWrapper {
+  DefaultValue? get defaultValue => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DefalutValueWrapperCopyWith<DefalutValueWrapper> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DefalutValueWrapperCopyWith<$Res> {
+  factory $DefalutValueWrapperCopyWith(
+          DefalutValueWrapper value, $Res Function(DefalutValueWrapper) then) =
+      _$DefalutValueWrapperCopyWithImpl<$Res, DefalutValueWrapper>;
+  @useResult
+  $Res call({DefaultValue? defaultValue});
+
+  $DefaultValueCopyWith<$Res>? get defaultValue;
+}
+
+/// @nodoc
+class _$DefalutValueWrapperCopyWithImpl<$Res, $Val extends DefalutValueWrapper>
+    implements $DefalutValueWrapperCopyWith<$Res> {
+  _$DefalutValueWrapperCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? defaultValue = freezed,
+  }) {
+    return _then(_value.copyWith(
+      defaultValue: freezed == defaultValue
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as DefaultValue?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DefaultValueCopyWith<$Res>? get defaultValue {
+    if (_value.defaultValue == null) {
+      return null;
+    }
+
+    return $DefaultValueCopyWith<$Res>(_value.defaultValue!, (value) {
+      return _then(_value.copyWith(defaultValue: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$DefalutValueWrapperImplCopyWith<$Res>
+    implements $DefalutValueWrapperCopyWith<$Res> {
+  factory _$$DefalutValueWrapperImplCopyWith(_$DefalutValueWrapperImpl value,
+          $Res Function(_$DefalutValueWrapperImpl) then) =
+      __$$DefalutValueWrapperImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DefaultValue? defaultValue});
+
+  @override
+  $DefaultValueCopyWith<$Res>? get defaultValue;
+}
+
+/// @nodoc
+class __$$DefalutValueWrapperImplCopyWithImpl<$Res>
+    extends _$DefalutValueWrapperCopyWithImpl<$Res, _$DefalutValueWrapperImpl>
+    implements _$$DefalutValueWrapperImplCopyWith<$Res> {
+  __$$DefalutValueWrapperImplCopyWithImpl(_$DefalutValueWrapperImpl _value,
+      $Res Function(_$DefalutValueWrapperImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? defaultValue = freezed,
+  }) {
+    return _then(_$DefalutValueWrapperImpl(
+      defaultValue: freezed == defaultValue
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as DefaultValue?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DefalutValueWrapperImpl implements _DefalutValueWrapper {
+  const _$DefalutValueWrapperImpl({this.defaultValue});
+
+  factory _$DefalutValueWrapperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DefalutValueWrapperImplFromJson(json);
+
+  @override
+  final DefaultValue? defaultValue;
+
+  @override
+  String toString() {
+    return 'DefalutValueWrapper(defaultValue: $defaultValue)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DefalutValueWrapperImpl &&
+            (identical(other.defaultValue, defaultValue) ||
+                other.defaultValue == defaultValue));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, defaultValue);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DefalutValueWrapperImplCopyWith<_$DefalutValueWrapperImpl> get copyWith =>
+      __$$DefalutValueWrapperImplCopyWithImpl<_$DefalutValueWrapperImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DefalutValueWrapperImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DefalutValueWrapper implements DefalutValueWrapper {
+  const factory _DefalutValueWrapper({final DefaultValue? defaultValue}) =
+      _$DefalutValueWrapperImpl;
+
+  factory _DefalutValueWrapper.fromJson(Map<String, dynamic> json) =
+      _$DefalutValueWrapperImpl.fromJson;
+
+  @override
+  DefaultValue? get defaultValue;
+  @override
+  @JsonKey(ignore: true)
+  _$$DefalutValueWrapperImplCopyWith<_$DefalutValueWrapperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

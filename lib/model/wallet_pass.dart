@@ -11,10 +11,13 @@ class WalletPass with _$WalletPass {
     @Default('GENERIC_TYPE_UNSPECIFIED') String genericType,
     @Default('#4285f4') String hexBackgroundColor,
     @Default(Logo()) Logo logo,
-    @Default(DefaultValue(value: 'Are you ready?')) DefaultValue cardTitle,
-    @Default(DefaultValue(value: 'Save the earth!')) DefaultValue subheader,
-    @Default(DefaultValue(value: 'Global Gamers Challenge!!'))
-    DefaultValue header,
+    @Default(CardTitle(defaultValue: DefaultValue(value: 'Are you ready?')))
+    CardTitle cardTitle,
+    @Default(Subheader(defaultValue: DefaultValue(value: 'Save the earth!')))
+    Subheader subheader,
+    @Default(
+        Header(defaultValue: DefaultValue(value: 'Global Gamers Challenge!!')))
+    Header header,
     @Default(Barcode(value: '3388000000022312255.codelab_object3'))
     Barcode barcode,
     @Default(HeroImage()) HeroImage heroImage,
@@ -52,6 +55,16 @@ class SourceUri with _$SourceUri {
 
   factory SourceUri.fromJson(Map<String, dynamic> json) =>
       _$SourceUriFromJson(json);
+}
+
+@freezed
+class DefalutValueWrapper with _$DefalutValueWrapper {
+  const factory DefalutValueWrapper({
+    DefaultValue? defaultValue,
+  }) = _DefalutValueWrapper;
+
+  factory DefalutValueWrapper.fromJson(Map<String, dynamic> json) =>
+      _$DefalutValueWrapperFromJson(json);
 }
 
 @freezed
@@ -103,3 +116,7 @@ class TextModulesData with _$TextModulesData {
   factory TextModulesData.fromJson(Map<String, dynamic> json) =>
       _$TextModulesDataFromJson(json);
 }
+
+typedef CardTitle = DefalutValueWrapper;
+typedef Subheader = DefalutValueWrapper;
+typedef Header = DefalutValueWrapper;
