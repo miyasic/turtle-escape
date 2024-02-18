@@ -6,17 +6,28 @@ part 'wallet_pass.g.dart';
 @freezed
 class WalletPass with _$WalletPass {
   const factory WalletPass({
-    @Default('3388000000022312255.codelab_object3') String id,
-    @Default('3388000000022312255.codelab_class2') String classId,
+    @Default('3388000000022312255.codelab_object') String id,
+    @Default('3388000000022312255.codelab_class') String classId,
     @Default('GENERIC_TYPE_UNSPECIFIED') String genericType,
     @Default('#4285f4') String hexBackgroundColor,
     @Default(Logo()) Logo logo,
-    @Default(CardTitle(defaultValue: DefaultValue(value: 'Are you ready?')))
+    @Default(
+      CardTitle(
+        defaultValue: DefaultValue(value: 'Are you ready?'),
+      ),
+    )
     CardTitle cardTitle,
-    @Default(Subheader(defaultValue: DefaultValue(value: 'Save the earth!')))
+    @Default(
+      Subheader(
+        defaultValue: DefaultValue(value: 'Save the earth!'),
+      ),
+    )
     Subheader subheader,
     @Default(
-        Header(defaultValue: DefaultValue(value: 'Global Gamers Challenge!!')))
+      Header(
+        defaultValue: DefaultValue(value: 'Global Gamers Challenge!!'),
+      ),
+    )
     Header header,
     @Default(Barcode(value: '3388000000022312255.codelab_object3'))
     Barcode barcode,
@@ -93,7 +104,6 @@ class Barcode with _$Barcode {
   }) = _Barcode;
 
   factory Barcode.qrCode({required String value}) => Barcode(
-        type: 'QR_CODE',
         value: value,
       );
 

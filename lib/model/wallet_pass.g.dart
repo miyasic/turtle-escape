@@ -8,9 +8,9 @@ part of 'wallet_pass.dart';
 
 _$WalletPassImpl _$$WalletPassImplFromJson(Map<String, dynamic> json) =>
     _$WalletPassImpl(
-      id: json['id'] as String? ?? '3388000000022312255.codelab_object3',
+      id: json['id'] as String? ?? '3388000000022312255.codelab_object',
       classId:
-          json['classId'] as String? ?? '3388000000022312255.codelab_class2',
+          json['classId'] as String? ?? '3388000000022312255.codelab_class',
       genericType: json['genericType'] as String? ?? 'GENERIC_TYPE_UNSPECIFIED',
       hexBackgroundColor: json['hexBackgroundColor'] as String? ?? '#4285f4',
       logo: json['logo'] == null

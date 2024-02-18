@@ -299,8 +299,8 @@ class __$$WalletPassImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WalletPassImpl implements _WalletPass {
   const _$WalletPassImpl(
-      {this.id = '3388000000022312255.codelab_object3',
-      this.classId = '3388000000022312255.codelab_class2',
+      {this.id = '3388000000022312255.codelab_object',
+      this.classId = '3388000000022312255.codelab_class',
       this.genericType = 'GENERIC_TYPE_UNSPECIFIED',
       this.hexBackgroundColor = '#4285f4',
       this.logo = const Logo(),
