@@ -6,6 +6,7 @@ import 'package:ggc/provider/google_wallet.dart';
 import 'package:ggc/provider/google_wallet_pass_repository.dart';
 import 'package:ggc/util/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../gen/assets.gen.dart';
 
@@ -21,8 +22,10 @@ class GoogleWalletButton extends ConsumerWidget {
       onTap: () async {
         await googleWallet.initWalletClient();
         try {
-          final id = '3388000000022312255.codelab_object14';
-          final classId = '3388000000022312255.codelab_class2';
+          final issureId = '3388000000022312255';
+          final uuid = const Uuid().v4();
+          final id = '$issureId.$uuid';
+          final classId = '$issureId.codelab_class2';
           final cardTitle =
               DefalutValueWrapper.defaultValue(value: 'Your score is $score');
           final colorCode = '#00ffff';
