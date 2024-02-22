@@ -16,7 +16,7 @@ class Trash extends CircleComponent
     // 衝突判定用のヒットボックスを追加
     add(CircleHitbox());
   }
-  // ボールの速度
+  // ゴミの速度
   Vector2 velocity = Vector2(0, 0);
 
   @override
@@ -58,14 +58,14 @@ class Trash extends CircleComponent
     }
     position = Vector2(startX, startY);
 
-    // game内のBallの位置を取得
-    final ball = game.findBallFromMovingRange();
+    // game内のFishの位置を取得
+    final fish = game.findFishFromMovingRange();
     Vector2 targetVector;
-    if (ball != null) {
-      // ボールに向かう速度ベクトルを計算
+    if (fish != null) {
+      // Fishに向かう速度ベクトルを計算
       targetVector = Vector2(
-        ball.position.x + 80 - startX, // 80はmovingRangeのx座標
-        ball.position.y + 220 - startY, // 220はmovingRangeのy座標
+        fish.position.x + 80 - startX, // 80はmovingRangeのx座標
+        fish.position.y + 220 - startY, // 220はmovingRangeのy座標
       );
     } else {
       // 中央に向かう速度ベクトルを計算

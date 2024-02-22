@@ -1,23 +1,33 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/trash.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-// CircleComponentを継承してBallクラスを作成
+// PositionComponentを継承してFishクラスを作成
 // CollisionCallbacks = 衝突時のコールバックを受け取る
 // HasGameReference = ゲームの参照
-class Ball extends RectangleComponent
+class Fish extends PositionComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
-  Ball() : super(size: Vector2(20, 20), paint: Paint()..color = Colors.white) {
+  Fish()
+      : super(
+          size: Vector2(20, 30),
+        ) {
     // 衝突判定用のヒットボックスを追加
-    add(CircleHitbox());
+    final shape = PolygonHitbox([
+      Vector2(10, 0),
+      Vector2(20, 10),
+      Vector2(10, 30),
+      Vector2(0, 10),
+    ]);
+    add(shape);
   }
-  // ボールの速度
+
+  // Fishの速度
   Vector2 velocity = Vector2(0, 0);
 
   late StreamSubscription<AccelerometerEvent> _accelerometerSubscription;
@@ -27,8 +37,17 @@ class Ball extends RectangleComponent
     super.update(dt);
 
     final newPosition = position + velocity * dt;
-    // MovingRangeの範囲内でボールを移動させる
+    // MovingRangeの範囲内でFishを移動させる
     position = _ensureWithinMovingRange(newPosition);
+
+    // 速度ベクトルがゼロでない場合、Fishの向きを更新
+    if (!velocity.isZero()) {
+      // atan2関数を使用して速度ベクトルの角度を計算（ラジアン単位）
+      final angleRadians = atan2(velocity.y, velocity.x);
+
+      // Fishの「正面」が上向き(-90度)にデフォルト設定されている場合、90度を加算して調整
+      angle = angleRadians + pi / 2; // π/2ラジアンを加えることで90度調整
+    }
   }
 
   @override
@@ -65,19 +84,19 @@ class Ball extends RectangleComponent
     final rangeRadius = movingRange.radius;
     final rangeCenter = Vector2(rangeRadius, rangeRadius);
 
-    // MovingRangeの中心からのボールの新しい位置までの距離を計算
+    // MovingRangeの中心からのFishの新しい位置までの距離を計算
     final distanceFromCenter = newPosition.distanceTo(rangeCenter);
 
-    // ボールがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
-    if (distanceFromCenter + 10 > rangeRadius) {
-      // MovingRangeの境界上にボールを位置させるための方向ベクトルを計算
+    // FishがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
+    if (distanceFromCenter + 5 > rangeRadius) {
+      // MovingRangeの境界上にFishを位置させるための方向ベクトルを計算
       final direction = newPosition - rangeCenter
         ..normalize(); // 方向ベクトルを正規化
-      // MovingRangeの境界上にボールを位置させる
-      return rangeCenter + direction * (rangeRadius - 10);
+      // MovingRangeの境界上にFishを位置させる
+      return rangeCenter + direction * (rangeRadius - 5);
     }
 
-    // ボールがMovingRangeの範囲内にある場合は、新しい位置をそのまま使用
+    // FishがMovingRangeの範囲内にある場合は、新しい位置をそのまま使用
     return newPosition;
   }
 }
