@@ -15,15 +15,15 @@ class SeaTurtle extends SpriteComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
   SeaTurtle()
       : super(
-          size: Vector2(40, 50),
+          size: Vector2(48, 60),
         ) {
     // 衝突判定用のヒットボックスを追加
     final shape = PolygonHitbox([
-      Vector2(20, 0),
-      Vector2(40, 25),
-      Vector2(30, 50),
-      Vector2(10, 50),
-      Vector2(0, 25),
+      Vector2(24, 0),
+      Vector2(48, 30),
+      Vector2(36, 60),
+      Vector2(12, 60),
+      Vector2(0, 30),
     ]);
     add(shape);
   }
