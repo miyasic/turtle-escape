@@ -2,34 +2,53 @@ import 'dart:math' as math;
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 
-class Trash extends CircleComponent
+class Trash extends SpriteComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
   Trash()
       : super(
-          radius: 4,
-          paint: Paint()..color = Colors.white,
+          size: Vector2(10, 30),
         ) {
     // 衝突判定用のヒットボックスを追加
-    add(CircleHitbox());
+    final shape = PolygonHitbox([
+      Vector2(5, 0),
+      Vector2(10, 7),
+      Vector2(10, 30),
+      Vector2(0, 30),
+      Vector2(0, 7),
+    ]);
+    add(shape);
+
+    final rand = math.Random();
+    rotationSpeed = rand.nextDouble() * 180 - 90;
   }
   // ゴミの速度
   Vector2 velocity = Vector2(0, 0);
+
+  // ゴミの回転速度（度/秒）
+  late double rotationSpeed;
 
   @override
   void update(double dt) {
     super.update(dt);
     position = position + velocity * dt;
+
+    angle += rotationSpeed * dt * math.pi / 180;
   }
 
   @override
-  Future<void> onLoad() {
+  Future<void> onLoad() async {
+    super.onLoad();
+
+    // 画像を読み込む
+    final sprite = await Sprite.load('bottle.png');
+    this.sprite = sprite;
+
     final rand = math.Random();
-    final screenWidth = game.size.x - 10;
-    final screenHeight = game.size.y - 10;
+    final screenWidth = game.size.x - 30;
+    final screenHeight = game.size.y - 30;
     final centerX = screenWidth / 2;
     final centerY = screenHeight / 2;
 
@@ -58,15 +77,15 @@ class Trash extends CircleComponent
     }
     position = Vector2(startX, startY);
 
-    // game内のFishの位置を取得
-    final fish = game.findSeaTurtleFromMovingRange();
+    // game内のSeaTurtleの位置を取得
+    final seaTurtle = game.findSeaTurtleFromMovingRange();
     final movingRange = game.findMovingRange();
     Vector2 targetVector;
-    if (fish != null && movingRange != null) {
-      // Fishに向かう速度ベクトルを計算
+    if (seaTurtle != null && movingRange != null) {
+      // SeaTurtleに向かう速度ベクトルを計算
       targetVector = Vector2(
-        fish.position.x + (movingRange.x - movingRange.radius) - startX,
-        fish.position.y + (movingRange.y - movingRange.radius) - startY,
+        seaTurtle.position.x + (movingRange.x - movingRange.radius) - startX,
+        seaTurtle.position.y + (movingRange.y - movingRange.radius) - startY,
       );
     } else {
       // 中央に向かう速度ベクトルを計算
@@ -75,8 +94,6 @@ class Trash extends CircleComponent
 
     targetVector.normalize(); // 単位ベクトルにする
     velocity = targetVector * (200 + rand.nextDouble() * 20); // 速さをランダムに設定
-
-    return super.onLoad();
   }
 
   @override

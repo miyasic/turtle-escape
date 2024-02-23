@@ -19,11 +19,11 @@ class MovingRange extends CircleComponent with HasGameReference<SampleGame> {
   Future<void> onLoad() async {
     await super.onLoad();
     position = game.size / 2;
-    final fish = SeaTurtle()
+    final seaTurtle = SeaTurtle()
       ..position = size / 2 // PlayAreaの中心
       ..anchor = Anchor.center
       ..velocity = Vector2(0, 0); // 初期速度を設定
-    add(fish);
+    add(seaTurtle);
   }
 
   SeaTurtle? findSeaTurtle() {

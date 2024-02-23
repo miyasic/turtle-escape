@@ -28,7 +28,7 @@ class SeaTurtle extends SpriteComponent
     add(shape);
   }
 
-  // Fishの速度
+  // SeaTurtleの速度
   Vector2 velocity = Vector2(0, 0);
 
   late StreamSubscription<AccelerometerEvent> _accelerometerSubscription;
@@ -38,15 +38,15 @@ class SeaTurtle extends SpriteComponent
     super.update(dt);
 
     final newPosition = position + velocity * dt;
-    // MovingRangeの範囲内でFishを移動させる
+    // MovingRangeの範囲内でSeaTurtleを移動させる
     position = _ensureWithinMovingRange(newPosition);
 
-    // 速度ベクトルがゼロでない場合、Fishの向きを更新
+    // 速度ベクトルがゼロでない場合、SeaTurtleの向きを更新
     if (!velocity.isZero()) {
       // atan2関数を使用して速度ベクトルの角度を計算（ラジアン単位）
       final angleRadians = atan2(velocity.y, velocity.x);
 
-      // Fishの「正面」が上向き(-90度)にデフォルト設定されている場合、90度を加算して調整
+      // SeaTurtleの「正面」が上向き(-90度)にデフォルト設定されている場合、90度を加算して調整
       angle = angleRadians + pi / 2; // π/2ラジアンを加えることで90度調整
     }
   }
@@ -89,19 +89,19 @@ class SeaTurtle extends SpriteComponent
     final rangeRadius = movingRange.radius;
     final rangeCenter = Vector2(rangeRadius, rangeRadius);
 
-    // MovingRangeの中心からのFishの新しい位置までの距離を計算
+    // MovingRangeの中心からのSeaTurtleの新しい位置までの距離を計算
     final distanceFromCenter = newPosition.distanceTo(rangeCenter);
 
-    // FishがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
+    // SeaTurtleがMovingRangeの範囲外に出る場合は、範囲内に収まるように位置を調整
     if (distanceFromCenter + 5 > rangeRadius) {
-      // MovingRangeの境界上にFishを位置させるための方向ベクトルを計算
+      // MovingRangeの境界上にSeaTurtleを位置させるための方向ベクトルを計算
       final direction = newPosition - rangeCenter
         ..normalize(); // 方向ベクトルを正規化
-      // MovingRangeの境界上にFishを位置させる
+      // MovingRangeの境界上にSeaTurtleを位置させる
       return rangeCenter + direction * (rangeRadius - 5);
     }
 
-    // FishがMovingRangeの範囲内にある場合は、新しい位置をそのまま使用
+    // SeaTurtleがMovingRangeの範囲内にある場合は、新しい位置をそのまま使用
     return newPosition;
   }
 }
