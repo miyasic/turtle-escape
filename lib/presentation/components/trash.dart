@@ -59,7 +59,7 @@ class Trash extends CircleComponent
     position = Vector2(startX, startY);
 
     // game内のFishの位置を取得
-    final fish = game.findFishFromMovingRange();
+    final fish = game.findSeaTurtleFromMovingRange();
     final movingRange = game.findMovingRange();
     Vector2 targetVector;
     if (fish != null && movingRange != null) {

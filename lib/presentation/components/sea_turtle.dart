@@ -8,20 +8,21 @@ import 'package:ggc/presentation/components/trash.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-// PositionComponentを継承してFishクラスを作成
+// SpriteComponentを継承してSeaTurtleクラスを作成
 // CollisionCallbacks = 衝突時のコールバックを受け取る
 // HasGameReference = ゲームの参照
-class Fish extends PositionComponent
+class SeaTurtle extends SpriteComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
-  Fish()
+  SeaTurtle()
       : super(
-          size: Vector2(20, 30),
+          size: Vector2(40, 50),
         ) {
     // 衝突判定用のヒットボックスを追加
     final shape = PolygonHitbox([
-      Vector2(10, 0),
-      Vector2(20, 10),
-      Vector2(10, 30),
+      Vector2(20, 0),
+      Vector2(40, 10),
+      Vector2(30, 50),
+      Vector2(10, 50),
       Vector2(0, 10),
     ]);
     add(shape);
@@ -51,7 +52,9 @@ class Fish extends PositionComponent
   }
 
   @override
-  FutureOr<void> onLoad() {
+  FutureOr<void> onLoad() async {
+    super.onLoad();
+
     _accelerometerSubscription = accelerometerEventStream().listen((event) {
       velocity
         // x軸のデータで横方向（左右）の移動を制御
@@ -59,7 +62,9 @@ class Fish extends PositionComponent
         // y軸のデータで縦方向（上下）の移動を制御
         ..y = event.y * 30;
     });
-    return super.onLoad();
+    // 画像を読み込む
+    final sprite = await Sprite.load('sea_turtle.png');
+    this.sprite = sprite;
   }
 
   @override
