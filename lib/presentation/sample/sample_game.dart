@@ -81,8 +81,6 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
           repeat: true,
           onTick: () {
             if (playState == PlayState.playing) {
-              score.value++;
-              print('score: ${score.value}');
               addTrash();
             }
           },
@@ -91,6 +89,7 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   }
 
   void addTrash() {
+    score.value += 1;
     final trash = Trash();
     world.add(trash);
   }
