@@ -60,12 +60,13 @@ class Trash extends CircleComponent
 
     // game内のFishの位置を取得
     final fish = game.findFishFromMovingRange();
+    final movingRange = game.findMovingRange();
     Vector2 targetVector;
-    if (fish != null) {
+    if (fish != null && movingRange != null) {
       // Fishに向かう速度ベクトルを計算
       targetVector = Vector2(
-        fish.position.x + 80 - startX, // 80はmovingRangeのx座標
-        fish.position.y + 220 - startY, // 220はmovingRangeのy座標
+        fish.position.x + (movingRange.x - movingRange.radius) - startX,
+        fish.position.y + (movingRange.y - movingRange.radius) - startY,
       );
     } else {
       // 中央に向かう速度ベクトルを計算

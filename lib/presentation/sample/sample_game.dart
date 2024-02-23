@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
+import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -15,13 +16,7 @@ enum PlayState { welcome, playing, gameOver, won }
 
 class SampleGame extends FlameGame
     with HasCollisionDetection, KeyboardEvents, TapDetector {
-  SampleGame()
-      : super(
-          camera: CameraComponent.withFixedResolution(
-            width: 360,
-            height: 640,
-          ),
-        );
+  SampleGame() : super();
 
   final ValueNotifier<int> score = ValueNotifier(0);
   final rand = math.Random();
@@ -49,6 +44,12 @@ class SampleGame extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
+
+    // デバイスの画面サイズを取得
+    final screenSize = size;
+
+    // カメラのビューポートをデバイスの画面サイズに設定
+    camera.viewport = FixedResolutionViewport(resolution: screenSize);
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
@@ -106,6 +107,11 @@ class SampleGame extends FlameGame
 
   @override
   Color backgroundColor() => const Color(0xfff2e8cf);
+
+  MovingRange? findMovingRange() {
+    return world.children.firstWhereOrNull((element) => element is MovingRange)
+        as MovingRange?;
+  }
 
   Fish? findFishFromMovingRange() {
     final movingRange = world.children
