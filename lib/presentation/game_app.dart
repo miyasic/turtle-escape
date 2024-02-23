@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:ggc/presentation/component/google_wallet_button.dart';
 import 'package:ggc/presentation/components/overlay_screen.dart';
+import 'package:ggc/presentation/components/score_card.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,34 +28,39 @@ class _GameAppState extends State<GameApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        textTheme: GoogleFonts.pressStart2pTextTheme().apply(
+        textTheme: GoogleFonts.delaGothicOneTextTheme().apply(
           bodyColor: const Color(0xff184e77),
           displayColor: const Color(0xff184e77),
         ),
       ),
       home: Scaffold(
         body: SafeArea(
-          child: GameWidget.controlled(
-            gameFactory: SampleGame.new,
-            overlayBuilderMap: {
-              // overlays.addで追加した名前をキーにして、
-              // その名前に対応するWidgetを返す
-              PlayState.welcome.name: (context, game) => const OverlayScreen(
-                    title: 'TAP TO PLAY',
-                    subtitle: 'Use arrow keys or swipe',
-                  ),
-              PlayState.gameOver.name: (context, game) => OverlayScreen(
-                    title: 'G A M E   O V E R',
-                    subtitle: 'Tap to Play Again',
-                    child: GoogleWalletButton(
-                      onPressed: () {},
-                    ),
-                  ),
-              PlayState.won.name: (context, game) => const OverlayScreen(
-                    title: 'Y O U   W O N ! ! !',
-                    subtitle: 'Tap to Play Again',
-                  ),
-            },
+          child: Column(
+            children: [
+              ScoreCard(score: game.score),
+              Expanded(
+                child: GameWidget(
+                  game: game,
+                  overlayBuilderMap: {
+                    // overlays.addで追加した名前をキーにして、
+                    // その名前に対応するWidgetを返す
+                    PlayState.welcome.name: (context, game) =>
+                        const OverlayScreen(
+                          title: 'タップでゲーム開始',
+                          subtitle: 'スマホを傾けてカメを動かそう！',
+                        ),
+
+                    PlayState.gameOver.name: (context, game) => OverlayScreen(
+                          title: 'ゲームオーバー',
+                          subtitle: 'タップで再挑戦！',
+                          child: GoogleWalletButton(
+                            onPressed: () {},
+                          ),
+                        ),
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

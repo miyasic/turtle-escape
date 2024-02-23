@@ -7,15 +7,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/components/fish.dart';
 import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
+import 'package:ggc/presentation/components/sea_turtle.dart';
 import 'package:ggc/presentation/components/trash.dart';
 
-enum PlayState { welcome, playing, gameOver, won }
+enum PlayState { welcome, playing, gameOver }
 
-class SampleGame extends FlameGame
-    with HasCollisionDetection, KeyboardEvents, TapDetector {
+class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   SampleGame() : super();
 
   final ValueNotifier<int> score = ValueNotifier(0);
@@ -30,14 +29,12 @@ class SampleGame extends FlameGame
     switch (playState) {
       case PlayState.welcome:
       case PlayState.gameOver:
-      case PlayState.won:
         world.removeAll(world.children.query<Trash>());
         world.removeAll(world.children.query<TimerComponent>());
         overlays.add(playState.name);
       case PlayState.playing:
         overlays.remove(PlayState.welcome.name);
         overlays.remove(PlayState.gameOver.name);
-        overlays.remove(PlayState.won.name);
     }
   }
 
@@ -73,24 +70,24 @@ class SampleGame extends FlameGame
     playState = PlayState.playing;
     score.value = 0;
 
-    // 行動範囲を表示
-    world.add(MovingRange());
-
-    addTrash();
-
-    // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
-    // 1秒ごとにゴミを追加
-    world.add(
-      TimerComponent(
-        period: 1,
-        repeat: true,
-        onTick: () {
-          if (playState == PlayState.playing) {
-            addTrash();
-          }
-        },
-      ),
-    );
+    world
+      // 行動範囲を表示
+      ..add(MovingRange())
+      // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
+      // 1秒ごとにゴミを追加
+      ..add(
+        TimerComponent(
+          period: 1,
+          repeat: true,
+          onTick: () {
+            if (playState == PlayState.playing) {
+              score.value++;
+              print('score: ${score.value}');
+              addTrash();
+            }
+          },
+        ),
+      );
   }
 
   void addTrash() {
@@ -113,12 +110,12 @@ class SampleGame extends FlameGame
         as MovingRange?;
   }
 
-  Fish? findFishFromMovingRange() {
+  SeaTurtle? findSeaTurtleFromMovingRange() {
     final movingRange = world.children
         .firstWhereOrNull((element) => element is MovingRange) as MovingRange?;
     if (movingRange == null) {
       return null;
     }
-    return movingRange.findFish();
+    return movingRange.findSeaTurtle();
   }
 }
