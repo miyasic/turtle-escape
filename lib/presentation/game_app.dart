@@ -34,30 +34,27 @@ class _GameAppState extends State<GameApp> {
       ),
       home: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: GameWidget.controlled(
-              gameFactory: SampleGame.new,
-              overlayBuilderMap: {
-                // overlays.addで追加した名前をキーにして、
-                // その名前に対応するWidgetを返す
-                PlayState.welcome.name: (context, game) => const OverlayScreen(
-                      title: 'TAP TO PLAY',
-                      subtitle: 'Use arrow keys or swipe',
+          child: GameWidget.controlled(
+            gameFactory: SampleGame.new,
+            overlayBuilderMap: {
+              // overlays.addで追加した名前をキーにして、
+              // その名前に対応するWidgetを返す
+              PlayState.welcome.name: (context, game) => const OverlayScreen(
+                    title: 'TAP TO PLAY',
+                    subtitle: 'Use arrow keys or swipe',
+                  ),
+              PlayState.gameOver.name: (context, game) => OverlayScreen(
+                    title: 'G A M E   O V E R',
+                    subtitle: 'Tap to Play Again',
+                    child: GoogleWalletButton(
+                      onPressed: () {},
                     ),
-                PlayState.gameOver.name: (context, game) => OverlayScreen(
-                      title: 'G A M E   O V E R',
-                      subtitle: 'Tap to Play Again',
-                      child: GoogleWalletButton(
-                        onPressed: () {},
-                      ),
-                    ),
-                PlayState.won.name: (context, game) => const OverlayScreen(
-                      title: 'Y O U   W O N ! ! !',
-                      subtitle: 'Tap to Play Again',
-                    ),
-              },
-            ),
+                  ),
+              PlayState.won.name: (context, game) => const OverlayScreen(
+                    title: 'Y O U   W O N ! ! !',
+                    subtitle: 'Tap to Play Again',
+                  ),
+            },
           ),
         ),
       ),
