@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ggc/constants/urls.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'google_wallet_pass_repository.g.dart';
@@ -6,19 +7,20 @@ part 'google_wallet_pass_repository.g.dart';
 @riverpod
 GoogleWalletPassRepository googleWalletPassRepository(
   GoogleWalletPassRepositoryRef ref,
-) =>
-    GoogleWalletPassRepository();
+) {
+  const env = String.fromEnvironment('env');
+  const endpoint = env == 'dev' ? localEmulatorEndpointUrl : gcrEndpointUrl;
+  return GoogleWalletPassRepository(endpoint: endpoint);
+}
 
 class GoogleWalletPassRepository {
+  GoogleWalletPassRepository({required this.endpoint});
   final Dio _dio = Dio();
-  // final String _endpoint =
-  // 'http://10.0.2.2:3000/generate-jwt'; // android emulatorの場合
-  final String _endpoint =
-      'https://backend-6i6ykk4rjq-an.a.run.app/generate-jwt'; // 実機&GCRサーバーの場合
+  final String endpoint;
 
   Future<String?> generateJwt(Map<String, dynamic> requestData) async {
     final response =
-        await _dio.post<Map<String, dynamic>>(_endpoint, data: requestData);
+        await _dio.post<Map<String, dynamic>>(endpoint, data: requestData);
     if (response.statusCode == 200) {
       return response.data?['jwt'].toString();
     }
