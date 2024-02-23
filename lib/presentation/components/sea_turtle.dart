@@ -20,10 +20,10 @@ class SeaTurtle extends SpriteComponent
     // 衝突判定用のヒットボックスを追加
     final shape = PolygonHitbox([
       Vector2(20, 0),
-      Vector2(40, 10),
+      Vector2(40, 25),
       Vector2(30, 50),
       Vector2(10, 50),
-      Vector2(0, 10),
+      Vector2(0, 25),
     ]);
     add(shape);
   }
