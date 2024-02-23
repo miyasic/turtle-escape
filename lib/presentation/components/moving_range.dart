@@ -9,7 +9,7 @@ class MovingRange extends CircleComponent with HasGameReference<SampleGame> {
   MovingRange()
       : super(
           radius: 120,
-          paint: Paint()..color = const Color.fromARGB(255, 47, 42, 142),
+          paint: Paint()..color = Colors.transparent,
           children: [CircleHitbox()], // 他のコンポーネントと衝突判定を行う
           anchor: Anchor.center,
           position: Vector2(0, 0),
