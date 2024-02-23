@@ -27,7 +27,9 @@ class OverlayScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.yellow.shade300,
+                ),
             textAlign: TextAlign.center,
           )
               .animate(onPlay: (controller) => controller.repeat())
