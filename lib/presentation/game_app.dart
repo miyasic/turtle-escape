@@ -50,11 +50,12 @@ class _GameAppState extends State<GameApp> {
                           subtitle: 'スマホを傾けてカメを動かそう！',
                         ),
 
-                    PlayState.gameOver.name: (context, game) => OverlayScreen(
+                    PlayState.gameOver.name: (context, SampleGame game) =>
+                        OverlayScreen(
                           title: 'ゲームオーバー',
                           subtitle: 'タップで再挑戦！',
                           child: GoogleWalletButton(
-                            onPressed: () {},
+                            score: game.score.value.toString(),
                           ),
                         ),
                   },

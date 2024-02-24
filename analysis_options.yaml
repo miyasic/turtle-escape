@@ -2,9 +2,13 @@
 include: package:pedantic_mono/analysis_options.yaml
 
 analyzer:
-  plugins:
-    - custom_lint
+  # plugins:
+  #   - custom_lint
+  exclude:
+    - lib/generated/**
+    - lib/**/*\.g\.dart
 
 linter:
   rules:
     flutter_style_todos: false
+    avoid_catches_without_on_clauses: false
