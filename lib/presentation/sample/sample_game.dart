@@ -2,26 +2,19 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
+import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/components/fish.dart';
-import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
+import 'package:ggc/presentation/components/sea_turtle.dart';
 import 'package:ggc/presentation/components/trash.dart';
 
-enum PlayState { welcome, playing, gameOver, won }
+enum PlayState { welcome, playing, gameOver }
 
-class SampleGame extends FlameGame
-    with HasCollisionDetection, KeyboardEvents, TapDetector {
-  SampleGame()
-      : super(
-          camera: CameraComponent.withFixedResolution(
-            width: 360,
-            height: 640,
-          ),
-        );
+class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
+  SampleGame() : super();
 
   final ValueNotifier<int> score = ValueNotifier(0);
   final rand = math.Random();
@@ -35,20 +28,24 @@ class SampleGame extends FlameGame
     switch (playState) {
       case PlayState.welcome:
       case PlayState.gameOver:
-      case PlayState.won:
         world.removeAll(world.children.query<Trash>());
         world.removeAll(world.children.query<TimerComponent>());
         overlays.add(playState.name);
       case PlayState.playing:
         overlays.remove(PlayState.welcome.name);
         overlays.remove(PlayState.gameOver.name);
-        overlays.remove(PlayState.won.name);
     }
   }
 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
+
+    // デバイスの画面サイズを取得
+    final screenSize = size;
+
+    // カメラのビューポートをデバイスの画面サイズに設定
+    camera.viewport = FixedResolutionViewport(resolution: screenSize);
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
@@ -66,30 +63,33 @@ class SampleGame extends FlameGame
       return;
     }
     world
-      ..removeAll(world.children.query<MovingRange>())
+      ..removeAll(world.children.query<SeaTurtle>())
       ..removeAll(world.children.query<Trash>());
 
     playState = PlayState.playing;
     score.value = 0;
 
-    // 行動範囲を表示
-    world.add(MovingRange());
+    final seaTurtle = SeaTurtle()
+      ..position = size / 2 // PlayAreaの中心
+      ..anchor = Anchor.center
+      ..velocity = Vector2(0, 0); // 初期速度を設定
 
-    addTrash();
-
-    // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
-    // 1秒ごとにゴミを追加
-    world.add(
-      TimerComponent(
-        period: 1,
-        repeat: true,
-        onTick: () {
-          if (playState == PlayState.playing) {
-            addTrash();
-          }
-        },
-      ),
-    );
+    world
+      // 行動範囲を表示
+      ..add(seaTurtle)
+      // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
+      // 1秒ごとにゴミを追加
+      ..add(
+        TimerComponent(
+          period: 1,
+          repeat: true,
+          onTick: () {
+            if (playState == PlayState.playing) {
+              addTrash();
+            }
+          },
+        ),
+      );
   }
 
   void addTrash() {
@@ -108,12 +108,8 @@ class SampleGame extends FlameGame
   @override
   Color backgroundColor() => const Color(0xfff2e8cf);
 
-  Fish? findFishFromMovingRange() {
-    final movingRange = world.children
-        .firstWhereOrNull((element) => element is MovingRange) as MovingRange?;
-    if (movingRange == null) {
-      return null;
-    }
-    return movingRange.findFish();
+  SeaTurtle? findSeaTurtle() {
+    return world.children.firstWhereOrNull((element) => element is SeaTurtle)
+        as SeaTurtle?;
   }
 }
