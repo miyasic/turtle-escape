@@ -5,9 +5,9 @@ import 'package:flame/components.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 
-class Trash extends SpriteComponent
+class Bottle extends SpriteComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
-  Trash()
+  Bottle()
       : super(
           size: Vector2(10, 30),
         ) {
