@@ -6,15 +6,29 @@ part 'wallet_pass.g.dart';
 @freezed
 class WalletPass with _$WalletPass {
   const factory WalletPass({
-    @Default('3388000000022312255.codelab_object3') String id,
-    @Default('3388000000022312255.codelab_class2') String classId,
+    @Default('3388000000022312255.codelab_object') String id,
+    @Default('3388000000022312255.codelab_class') String classId,
     @Default('GENERIC_TYPE_UNSPECIFIED') String genericType,
     @Default('#4285f4') String hexBackgroundColor,
     @Default(Logo()) Logo logo,
-    @Default(DefaultValue(value: 'Are you ready?')) DefaultValue cardTitle,
-    @Default(DefaultValue(value: 'Save the earth!')) DefaultValue subheader,
-    @Default(DefaultValue(value: 'Global Gamers Challenge!!'))
-    DefaultValue header,
+    @Default(
+      CardTitle(
+        defaultValue: DefaultValue(value: 'Are you ready?'),
+      ),
+    )
+    CardTitle cardTitle,
+    @Default(
+      Subheader(
+        defaultValue: DefaultValue(value: 'Save the earth!'),
+      ),
+    )
+    Subheader subheader,
+    @Default(
+      Header(
+        defaultValue: DefaultValue(value: 'Global Gamers Challenge!!'),
+      ),
+    )
+    Header header,
     @Default(Barcode(value: '3388000000022312255.codelab_object3'))
     Barcode barcode,
     @Default(HeroImage()) HeroImage heroImage,
@@ -55,6 +69,23 @@ class SourceUri with _$SourceUri {
 }
 
 @freezed
+class DefalutValueWrapper with _$DefalutValueWrapper {
+  const factory DefalutValueWrapper({
+    DefaultValue? defaultValue,
+  }) = _DefalutValueWrapper;
+
+  factory DefalutValueWrapper.defaultValue({
+    required String value,
+  }) =>
+      DefalutValueWrapper(
+        defaultValue: DefaultValue(value: value),
+      );
+
+  factory DefalutValueWrapper.fromJson(Map<String, dynamic> json) =>
+      _$DefalutValueWrapperFromJson(json);
+}
+
+@freezed
 class DefaultValue with _$DefaultValue {
   const factory DefaultValue({
     @Default('en-US') String language,
@@ -72,6 +103,10 @@ class Barcode with _$Barcode {
     required String value,
   }) = _Barcode;
 
+  factory Barcode.qrCode({required String value}) => Barcode(
+        value: value,
+      );
+
   factory Barcode.fromJson(Map<String, dynamic> json) =>
       _$BarcodeFromJson(json);
 }
@@ -88,6 +123,10 @@ class HeroImage with _$HeroImage {
     SourceUri sourceUri,
   }) = _HeroImage;
 
+  factory HeroImage.fromUri(String uri) => HeroImage(
+        sourceUri: SourceUri(uri: uri),
+      );
+
   factory HeroImage.fromJson(Map<String, dynamic> json) =>
       _$HeroImageFromJson(json);
 }
@@ -103,3 +142,7 @@ class TextModulesData with _$TextModulesData {
   factory TextModulesData.fromJson(Map<String, dynamic> json) =>
       _$TextModulesDataFromJson(json);
 }
+
+typedef CardTitle = DefalutValueWrapper;
+typedef Subheader = DefalutValueWrapper;
+typedef Header = DefalutValueWrapper;

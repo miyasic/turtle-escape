@@ -8,23 +8,28 @@ part of 'wallet_pass.dart';
 
 _$WalletPassImpl _$$WalletPassImplFromJson(Map<String, dynamic> json) =>
     _$WalletPassImpl(
-      id: json['id'] as String? ?? '3388000000022312255.codelab_object3',
+      id: json['id'] as String? ?? '3388000000022312255.codelab_object',
       classId:
-          json['classId'] as String? ?? '3388000000022312255.codelab_class2',
+          json['classId'] as String? ?? '3388000000022312255.codelab_class',
       genericType: json['genericType'] as String? ?? 'GENERIC_TYPE_UNSPECIFIED',
       hexBackgroundColor: json['hexBackgroundColor'] as String? ?? '#4285f4',
       logo: json['logo'] == null
           ? const Logo()
           : Logo.fromJson(json['logo'] as Map<String, dynamic>),
       cardTitle: json['cardTitle'] == null
-          ? const DefaultValue(value: 'Are you ready?')
-          : DefaultValue.fromJson(json['cardTitle'] as Map<String, dynamic>),
+          ? const CardTitle(defaultValue: DefaultValue(value: 'Are you ready?'))
+          : DefalutValueWrapper.fromJson(
+              json['cardTitle'] as Map<String, dynamic>),
       subheader: json['subheader'] == null
-          ? const DefaultValue(value: 'Save the earth!')
-          : DefaultValue.fromJson(json['subheader'] as Map<String, dynamic>),
+          ? const Subheader(
+              defaultValue: DefaultValue(value: 'Save the earth!'))
+          : DefalutValueWrapper.fromJson(
+              json['subheader'] as Map<String, dynamic>),
       header: json['header'] == null
-          ? const DefaultValue(value: 'Global Gamers Challenge!!')
-          : DefaultValue.fromJson(json['header'] as Map<String, dynamic>),
+          ? const Header(
+              defaultValue: DefaultValue(value: 'Global Gamers Challenge!!'))
+          : DefalutValueWrapper.fromJson(
+              json['header'] as Map<String, dynamic>),
       barcode: json['barcode'] == null
           ? const Barcode(value: '3388000000022312255.codelab_object3')
           : Barcode.fromJson(json['barcode'] as Map<String, dynamic>),
@@ -76,6 +81,20 @@ _$SourceUriImpl _$$SourceUriImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$SourceUriImplToJson(_$SourceUriImpl instance) =>
     <String, dynamic>{
       'uri': instance.uri,
+    };
+
+_$DefalutValueWrapperImpl _$$DefalutValueWrapperImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DefalutValueWrapperImpl(
+      defaultValue: json['defaultValue'] == null
+          ? null
+          : DefaultValue.fromJson(json['defaultValue'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$DefalutValueWrapperImplToJson(
+        _$DefalutValueWrapperImpl instance) =>
+    <String, dynamic>{
+      'defaultValue': instance.defaultValue,
     };
 
 _$DefaultValueImpl _$$DefaultValueImplFromJson(Map<String, dynamic> json) =>

@@ -7,7 +7,7 @@ part of 'google_wallet_pass_repository.dart';
 // **************************************************************************
 
 String _$googleWalletPassRepositoryHash() =>
-    r'c68e4792208d1c68c18de80c04f4ff75c3221cf5';
+    r'c5e036dea1ac417f66915f382f330697069871b2';
 
 /// See also [googleWalletPassRepository].
 @ProviderFor(googleWalletPassRepository)
