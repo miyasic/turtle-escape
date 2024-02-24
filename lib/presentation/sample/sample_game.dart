@@ -9,7 +9,9 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/sea_turtle.dart';
-import 'package:ggc/presentation/components/trash.dart';
+import 'package:ggc/presentation/components/trash/bottle.dart';
+import 'package:ggc/presentation/components/trash/plastic_bag.dart';
+import 'package:ggc/presentation/components/trash/straw.dart';
 
 enum PlayState { welcome, playing, gameOver }
 
@@ -28,7 +30,9 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
     switch (playState) {
       case PlayState.welcome:
       case PlayState.gameOver:
-        world.removeAll(world.children.query<Trash>());
+        world.removeAll(world.children.query<Bottle>());
+        world.removeAll(world.children.query<Straw>());
+        world.removeAll(world.children.query<PlasticBag>());
         world.removeAll(world.children.query<TimerComponent>());
         overlays.add(playState.name);
       case PlayState.playing:
@@ -64,7 +68,9 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
     }
     world
       ..removeAll(world.children.query<SeaTurtle>())
-      ..removeAll(world.children.query<Trash>());
+      ..removeAll(world.children.query<Bottle>())
+      ..removeAll(world.children.query<Straw>())
+      ..removeAll(world.children.query<PlasticBag>());
 
     playState = PlayState.playing;
     score.value = 0;
@@ -94,8 +100,23 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
 
   void addTrash() {
     score.value += 1;
-    final trash = Trash();
-    world.add(trash);
+
+    switch (rand.nextInt(3)) {
+      // 0: bottle, 1: straw, 2: plastic_bag
+      case 0:
+        final trash = Bottle();
+        world.add(trash);
+
+      case 1:
+        final trash = Straw();
+        world.add(trash);
+
+      default: // case 3:
+        final trash = PlasticBag();
+        world.add(trash);
+
+        break;
+    }
   }
 
   @override

@@ -5,19 +5,20 @@ import 'package:flame/components.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/sample/sample_game.dart';
 
-class Trash extends SpriteComponent
+class PlasticBag extends SpriteComponent
     with CollisionCallbacks, HasGameReference<SampleGame> {
-  Trash()
+  PlasticBag()
       : super(
-          size: Vector2(10, 30),
+          size: Vector2(23, 33),
         ) {
     // 衝突判定用のヒットボックスを追加
     final shape = PolygonHitbox([
-      Vector2(5, 0),
-      Vector2(10, 7),
-      Vector2(10, 30),
-      Vector2(0, 30),
-      Vector2(0, 7),
+      Vector2(11, 0),
+      Vector2(13, 9),
+      Vector2(20, 3),
+      Vector2(23, 9),
+      Vector2(20, 33),
+      Vector2(0, 28),
     ]);
     add(shape);
 
@@ -43,7 +44,7 @@ class Trash extends SpriteComponent
     super.onLoad();
 
     // 画像を読み込む
-    final sprite = await Sprite.load('bottle.png');
+    final sprite = await Sprite.load('plastic_bag.png');
     this.sprite = sprite;
 
     final rand = math.Random();
