@@ -29,8 +29,8 @@ class _GameAppState extends State<GameApp> {
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.delaGothicOneTextTheme().apply(
-          bodyColor: const Color(0xff184e77),
-          displayColor: const Color(0xff184e77),
+          bodyColor: const Color.fromARGB(255, 24, 78, 119),
+          displayColor: Colors.yellow.shade300,
         ),
       ),
       home: Scaffold(

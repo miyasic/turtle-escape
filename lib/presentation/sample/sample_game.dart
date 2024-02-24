@@ -7,7 +7,6 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:ggc/presentation/components/moving_range.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/sea_turtle.dart';
 import 'package:ggc/presentation/components/trash.dart';
@@ -64,15 +63,20 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
       return;
     }
     world
-      ..removeAll(world.children.query<MovingRange>())
+      ..removeAll(world.children.query<SeaTurtle>())
       ..removeAll(world.children.query<Trash>());
 
     playState = PlayState.playing;
     score.value = 0;
 
+    final seaTurtle = SeaTurtle()
+      ..position = size / 2 // PlayAreaの中心
+      ..anchor = Anchor.center
+      ..velocity = Vector2(0, 0); // 初期速度を設定
+
     world
       // 行動範囲を表示
-      ..add(MovingRange())
+      ..add(seaTurtle)
       // TODO: 最初はゆっくり追加して、徐々に感覚を狭める
       // 1秒ごとにゴミを追加
       ..add(
@@ -104,17 +108,8 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   @override
   Color backgroundColor() => const Color(0xfff2e8cf);
 
-  MovingRange? findMovingRange() {
-    return world.children.firstWhereOrNull((element) => element is MovingRange)
-        as MovingRange?;
-  }
-
-  SeaTurtle? findSeaTurtleFromMovingRange() {
-    final movingRange = world.children
-        .firstWhereOrNull((element) => element is MovingRange) as MovingRange?;
-    if (movingRange == null) {
-      return null;
-    }
-    return movingRange.findSeaTurtle();
+  SeaTurtle? findSeaTurtle() {
+    return world.children.firstWhereOrNull((element) => element is SeaTurtle)
+        as SeaTurtle?;
   }
 }
