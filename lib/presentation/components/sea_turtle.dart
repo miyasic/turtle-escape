@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/services.dart';
 import 'package:ggc/presentation/components/trash/bottle.dart';
 import 'package:ggc/presentation/components/trash/plastic_bag.dart';
 import 'package:ggc/presentation/components/trash/straw.dart';
@@ -78,6 +79,7 @@ class SeaTurtle extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
     if (other is Bottle || other is Straw || other is PlasticBag) {
+      HapticFeedback.heavyImpact();
       game.playState = PlayState.gameOver;
       game.world.removeAll(game.world.children.query<SeaTurtle>());
       game.world.removeAll(game.world.children.query<Bottle>());
