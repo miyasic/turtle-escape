@@ -78,14 +78,13 @@ class Trash extends SpriteComponent
     position = Vector2(startX, startY);
 
     // game内のSeaTurtleの位置を取得
-    final seaTurtle = game.findSeaTurtleFromMovingRange();
-    final movingRange = game.findMovingRange();
+    final seaTurtle = game.findSeaTurtle();
     Vector2 targetVector;
-    if (seaTurtle != null && movingRange != null) {
+    if (seaTurtle != null) {
       // SeaTurtleに向かう速度ベクトルを計算
       targetVector = Vector2(
-        seaTurtle.position.x + (movingRange.x - movingRange.radius) - startX,
-        seaTurtle.position.y + (movingRange.y - movingRange.radius) - startY,
+        seaTurtle.position.x - startX,
+        seaTurtle.position.y - startY,
       );
     } else {
       // 中央に向かう速度ベクトルを計算

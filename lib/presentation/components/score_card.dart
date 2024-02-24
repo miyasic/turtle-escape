@@ -21,8 +21,8 @@ class ScoreCard extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color.fromRGBO(90, 170, 170, 1),
-                Color.fromRGBO(120, 190, 190, 1),
+                Color.fromRGBO(100, 160, 160, 1),
+                Color.fromRGBO(100, 180, 180, 1),
               ],
             ),
           ),
