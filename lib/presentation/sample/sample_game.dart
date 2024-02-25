@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:ggc/presentation/components/play_area.dart';
@@ -12,6 +13,7 @@ import 'package:ggc/presentation/components/sea_turtle.dart';
 import 'package:ggc/presentation/components/trash/bottle.dart';
 import 'package:ggc/presentation/components/trash/plastic_bag.dart';
 import 'package:ggc/presentation/components/trash/straw.dart';
+import 'package:ggc/services/shared_preferences_service.dart';
 
 enum PlayState { welcome, playing, gameOver }
 
@@ -22,6 +24,10 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   final rand = math.Random();
   double get width => size.x;
   double get height => size.y;
+
+  // ハイスコア　3位までを保存するリスト
+  final ValueNotifier<List<(int seconds, bool newRecord, String createdAt)>>
+      highScores = ValueNotifier([]);
 
   late PlayState _playState;
   PlayState get playState => _playState;
@@ -57,6 +63,10 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
     world.add(PlayArea());
 
     playState = PlayState.welcome;
+
+    // ハイスコアを取得
+    final hiScores = SharedPreferencesService().getRanking();
+    highScores.value.addAll(hiScores);
 
     // デバッグモードを有効にする
     debugMode = true;
@@ -123,6 +133,7 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   void onTap() {
     super.onTap();
     // タップしたらゲームを開始
+    removeNewRecordsFromHighScores();
     startGame();
   }
 
@@ -132,5 +143,35 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   SeaTurtle? findSeaTurtle() {
     return world.children.firstWhereOrNull((element) => element is SeaTurtle)
         as SeaTurtle?;
+  }
+
+  Future<void> setScore() async {
+    // highScoreの値を取得し、スコアが更新していない場合は何もしない
+    final tempScores = highScores.value;
+    if (tempScores.isNotEmpty &&
+        tempScores.length >= 3 &&
+        tempScores.last.$1 >= score.value) {
+      return;
+    }
+
+    tempScores
+      ..add((score.value, true, DateTime.now().toLocal().toString()))
+      ..sort((a, b) => a.$1.compareTo(b.$1))
+      ..reverse();
+    if (tempScores.length > 3) {
+      tempScores.removeAt(3);
+    }
+    highScores.value = tempScores;
+    await SharedPreferencesService().saveRanking(tempScores);
+  }
+
+  Future<void> removeNewRecordsFromHighScores() async {
+    // scoreのnewRecordをfalseにする
+    final tempHighScores = <(int seconds, bool newRecord, String createdAt)>[];
+    for (final element in highScores.value) {
+      tempHighScores.add((element.$1, false, element.$3));
+    }
+    highScores.value = tempHighScores;
+    await SharedPreferencesService().saveRanking(tempHighScores);
   }
 }

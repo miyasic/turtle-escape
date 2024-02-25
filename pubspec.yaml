@@ -27,6 +27,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
   roggle: ^0.4.2+1
   sensors_plus: ^4.0.2
+  shared_preferences: ^2.2.2
   uuid: ^4.3.3
 
 dev_dependencies:
@@ -47,13 +48,12 @@ flutter:
     - assets/svg/
     - assets/images/
 
-
 flutter_launcher_icons:
-   android: true
-   ios: true
-   image_path: 'assets/images/icon.png'
-   adaptive_icon_background: '#011C88'
-   adaptive_icon_foreground: 'assets/images/icon-adaptive.png'
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  adaptive_icon_background: "#011C88"
+  adaptive_icon_foreground: "assets/images/icon-adaptive.png"
 
 flutter_native_splash:
   color: "#011C88"

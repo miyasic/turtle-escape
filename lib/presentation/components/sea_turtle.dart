@@ -83,6 +83,8 @@ class SeaTurtle extends SpriteComponent
       game.world.removeAll(game.world.children.query<Bottle>());
       game.world.removeAll(game.world.children.query<Straw>());
       game.world.removeAll(game.world.children.query<PlasticBag>());
+
+      game.setScore();
     }
   }
 

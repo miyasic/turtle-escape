@@ -44,16 +44,18 @@ class _GameAppState extends State<GameApp> {
                   overlayBuilderMap: {
                     // overlays.addで追加した名前をキーにして、
                     // その名前に対応するWidgetを返す
-                    PlayState.welcome.name: (context, game) =>
-                        const OverlayScreen(
-                          title: 'タップでゲーム開始',
+                    PlayState.welcome.name: (context, SampleGame game) =>
+                        OverlayScreen(
+                          title: '画面タップでゲーム開始',
                           subtitle: 'スマホを傾けてカメを動かそう！',
+                          hiScores: game.highScores.value,
                         ),
 
                     PlayState.gameOver.name: (context, SampleGame game) =>
                         OverlayScreen(
                           title: 'ゲームオーバー',
-                          subtitle: 'タップで再挑戦！',
+                          subtitle: '画面タップで再挑戦！',
+                          hiScores: game.highScores.value,
                           child: GoogleWalletButton(
                             score: game.score.value.toString(),
                           ),
