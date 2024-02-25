@@ -48,8 +48,8 @@ class Straw extends SpriteComponent
     this.sprite = sprite;
 
     final rand = math.Random();
-    final screenWidth = game.size.x - 30;
-    final screenHeight = game.size.y - 30;
+    final screenWidth = game.size.x - 20;
+    final screenHeight = game.size.y - 20;
     final centerX = screenWidth / 2;
     final centerY = screenHeight / 2;
 
