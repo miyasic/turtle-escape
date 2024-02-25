@@ -8,6 +8,7 @@ import 'package:ggc/presentation/components/trash/plastic_bag.dart';
 import 'package:ggc/presentation/components/trash/straw.dart';
 import 'package:ggc/presentation/game/turtle_escape.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:vibration/vibration.dart';
 
 // SpriteComponentを継承してSeaTurtleクラスを作成
 // CollisionCallbacks = 衝突時のコールバックを受け取る
@@ -78,6 +79,7 @@ class SeaTurtle extends SpriteComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
     if (other is Bottle || other is Straw || other is PlasticBag) {
+      Vibration.vibrate(duration: 200);
       game.playState = PlayState.gameOver;
       game.world.removeAll(game.world.children.query<SeaTurtle>());
       game.world.removeAll(game.world.children.query<Bottle>());
