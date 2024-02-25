@@ -3,10 +3,10 @@ import 'dart:math' as math;
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:ggc/presentation/components/play_area.dart';
-import 'package:ggc/presentation/sample/sample_game.dart';
+import 'package:ggc/presentation/game/turtle_escape.dart';
 
 class Straw extends SpriteComponent
-    with CollisionCallbacks, HasGameReference<SampleGame> {
+    with CollisionCallbacks, HasGameReference<TurtleEscape> {
   Straw()
       : super(
           size: Vector2(10, 20),
@@ -48,8 +48,8 @@ class Straw extends SpriteComponent
     this.sprite = sprite;
 
     final rand = math.Random();
-    final screenWidth = game.size.x - 30;
-    final screenHeight = game.size.y - 30;
+    final screenWidth = game.size.x - 20;
+    final screenHeight = game.size.y - 20;
     final centerX = screenWidth / 2;
     final centerY = screenHeight / 2;
 
