@@ -7,7 +7,7 @@ enum SharedPreferencesKey {
   ;
 }
 
-typedef Score = (int seconds, bool newRecord, bool rankedIn, String createdAt);
+typedef Score = (int seconds, bool newRecord, String createdAt);
 
 class SharedPreferencesService {
   factory SharedPreferencesService() {
@@ -34,7 +34,6 @@ class SharedPreferencesService {
       return (
         decoded['seconds'] as int,
         decoded['newRecord'] as bool,
-        decoded['rankedIn'] as bool,
         decoded['createdAt'] as String
       );
     }).toList();
@@ -50,7 +49,6 @@ class SharedPreferencesService {
             {
               'seconds': e.$1,
               'newRecord': e.$2,
-              'rankedIn': e.$3,
               'createdAt': e.$3,
             },
           ),

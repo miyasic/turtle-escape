@@ -61,12 +61,12 @@ class OverlayScreen extends StatelessWidget {
                               color: Colors.yellow.shade300,
                             ),
                       ),
-                      hiScores[i].$3
+                      hiScores[i].$2
                           ? Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8),
                                 child: Text(
-                                  hiScores[i].$2 ? '✨新記録✨' : 'ランクイン',
+                                  i == 0 ? '✨新記録✨' : 'ランクイン',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge

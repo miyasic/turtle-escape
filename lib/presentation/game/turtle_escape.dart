@@ -153,18 +153,8 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
       return;
     }
 
-    if (tempScores.isEmpty) {
-      tempScores
-          .add((score.value, true, true, DateTime.now().toLocal().toString()));
-    } else if (tempScores.first.$1 < score.value) {
-      tempScores
-          .add((score.value, true, true, DateTime.now().toLocal().toString()));
-    } else {
-      tempScores
-          .add((score.value, false, true, DateTime.now().toLocal().toString()));
-    }
-
     tempScores
+      ..add((score.value, true, DateTime.now().toLocal().toString()))
       ..sort((a, b) => a.$1.compareTo(b.$1))
       ..reverse();
     if (tempScores.length > 3) {
@@ -178,7 +168,7 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
     // scoreのnewRecordをfalseにする
     final tempHighScores = <Score>[];
     for (final element in highScores.value) {
-      tempHighScores.add((element.$1, false, false, element.$4));
+      tempHighScores.add((element.$1, false, element.$3));
     }
     highScores.value = tempHighScores;
     await SharedPreferencesService().saveRanking(tempHighScores);
