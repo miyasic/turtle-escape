@@ -4,6 +4,7 @@ import 'package:ggc/constants/values.dart';
 import 'package:ggc/model/wallet_pass.dart';
 import 'package:ggc/provider/google_wallet.dart';
 import 'package:ggc/provider/google_wallet_pass_repository.dart';
+import 'package:ggc/util/format_duration.dart';
 import 'package:ggc/util/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -43,7 +44,9 @@ class GoogleWalletButton extends ConsumerWidget {
     final uuid = const Uuid().v4();
     final id = '$issureId.$uuid';
     const classId = '$issureId.$className';
-    final cardTitle = DefalutValueWrapper.defaultValue(value: '今回のスコアは $score');
+    final cardTitle = DefalutValueWrapper.defaultValue(
+      value: '今回のスコアは ${formatDuration(score)} 秒',
+    );
     final subheader = DefalutValueWrapper.defaultValue(value: subHeader);
     final header = DefalutValueWrapper.defaultValue(value: _header);
     final heroImage = _heroImage;
