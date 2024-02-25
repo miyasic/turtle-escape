@@ -12,7 +12,7 @@ part of 'wallet_pass.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 WalletPass _$WalletPassFromJson(Map<String, dynamic> json) {
   return _WalletPass.fromJson(json);
@@ -562,7 +562,7 @@ class _$LogoImpl implements _Logo {
   const _$LogoImpl(
       {this.sourceUri = const SourceUri(
           uri:
-              'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg')});
+              'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true')});
 
   factory _$LogoImpl.fromJson(Map<String, dynamic> json) =>
       _$$LogoImplFromJson(json);

@@ -64,7 +64,7 @@ _$LogoImpl _$$LogoImplFromJson(Map<String, dynamic> json) => _$LogoImpl(
       sourceUri: json['sourceUri'] == null
           ? const SourceUri(
               uri:
-                  'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg')
+                  'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true')
           : SourceUri.fromJson(json['sourceUri'] as Map<String, dynamic>),
     );
 

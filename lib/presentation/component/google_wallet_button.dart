@@ -47,10 +47,6 @@ class GoogleWalletButton extends ConsumerWidget {
     final subheader = DefalutValueWrapper.defaultValue(value: subHeader);
     final header = DefalutValueWrapper.defaultValue(value: _header);
     final heroImage = _heroImage;
-    final logo = Logo(
-        sourceUri: SourceUri(
-            uri:
-                'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true'));
     return WalletPass(
       cardTitle: cardTitle,
       id: id,
@@ -59,7 +55,6 @@ class GoogleWalletButton extends ConsumerWidget {
       heroImage: heroImage,
       subheader: subheader,
       header: header,
-      logo: logo,
     );
   }
 

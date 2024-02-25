@@ -48,7 +48,7 @@ class Logo with _$Logo {
     @Default(
       SourceUri(
         uri:
-            'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg',
+            'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true',
       ),
     )
     SourceUri sourceUri,
