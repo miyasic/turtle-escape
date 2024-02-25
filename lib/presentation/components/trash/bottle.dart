@@ -3,10 +3,10 @@ import 'dart:math' as math;
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:ggc/presentation/components/play_area.dart';
-import 'package:ggc/presentation/sample/sample_game.dart';
+import 'package:ggc/presentation/game/turtle_escape.dart';
 
 class Bottle extends SpriteComponent
-    with CollisionCallbacks, HasGameReference<SampleGame> {
+    with CollisionCallbacks, HasGameReference<TurtleEscape> {
   Bottle()
       : super(
           size: Vector2(10, 30),

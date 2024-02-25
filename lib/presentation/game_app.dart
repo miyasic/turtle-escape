@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ggc/presentation/component/google_wallet_button.dart';
 import 'package:ggc/presentation/components/overlay_screen.dart';
 import 'package:ggc/presentation/components/score_card.dart';
-import 'package:ggc/presentation/sample/sample_game.dart';
+import 'package:ggc/presentation/game/turtle_escape.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GameApp extends StatefulWidget {
@@ -14,12 +14,12 @@ class GameApp extends StatefulWidget {
 }
 
 class _GameAppState extends State<GameApp> {
-  late final SampleGame game;
+  late final TurtleEscape game;
 
   @override
   void initState() {
     super.initState();
-    game = SampleGame();
+    game = TurtleEscape();
   }
 
   @override
@@ -44,14 +44,14 @@ class _GameAppState extends State<GameApp> {
                   overlayBuilderMap: {
                     // overlays.addで追加した名前をキーにして、
                     // その名前に対応するWidgetを返す
-                    PlayState.welcome.name: (context, SampleGame game) =>
+                    PlayState.welcome.name: (context, TurtleEscape game) =>
                         OverlayScreen(
                           title: '画面タップでゲーム開始',
                           subtitle: 'スマホを傾けてカメを動かそう！',
                           hiScores: game.highScores.value,
                         ),
 
-                    PlayState.gameOver.name: (context, SampleGame game) =>
+                    PlayState.gameOver.name: (context, TurtleEscape game) =>
                         OverlayScreen(
                           title: 'ゲームオーバー',
                           subtitle: '画面タップで再挑戦！',

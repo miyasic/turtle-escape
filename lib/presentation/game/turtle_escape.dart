@@ -17,8 +17,8 @@ import 'package:ggc/services/shared_preferences_service.dart';
 
 enum PlayState { welcome, playing, gameOver }
 
-class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
-  SampleGame() : super();
+class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
+  TurtleEscape() : super();
 
   final ValueNotifier<int> score = ValueNotifier(0);
   final rand = math.Random();
