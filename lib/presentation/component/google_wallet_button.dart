@@ -47,14 +47,12 @@ class GoogleWalletButton extends ConsumerWidget {
         DefalutValueWrapper.defaultValue(value: 'Your score is $score');
     const colorCode = '#00ffff';
     final heroImage = HeroImage.fromUri(imageUrl);
-    final barcode = Barcode.qrCode(value: siteUrl);
     return WalletPass(
       cardTitle: cardTitle,
       id: id,
       classId: classId,
       hexBackgroundColor: colorCode,
       heroImage: heroImage,
-      barcode: barcode,
     );
   }
 }

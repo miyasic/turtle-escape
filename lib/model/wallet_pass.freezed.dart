@@ -28,7 +28,7 @@ mixin _$WalletPass {
   DefalutValueWrapper get cardTitle => throw _privateConstructorUsedError;
   DefalutValueWrapper get subheader => throw _privateConstructorUsedError;
   DefalutValueWrapper get header => throw _privateConstructorUsedError;
-  Barcode get barcode => throw _privateConstructorUsedError;
+  Barcode? get barcode => throw _privateConstructorUsedError;
   HeroImage get heroImage => throw _privateConstructorUsedError;
   List<TextModulesData> get textModulesData =>
       throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $WalletPassCopyWith<$Res> {
       DefalutValueWrapper cardTitle,
       DefalutValueWrapper subheader,
       DefalutValueWrapper header,
-      Barcode barcode,
+      Barcode? barcode,
       HeroImage heroImage,
       List<TextModulesData> textModulesData});
 
@@ -62,7 +62,7 @@ abstract class $WalletPassCopyWith<$Res> {
   $DefalutValueWrapperCopyWith<$Res> get cardTitle;
   $DefalutValueWrapperCopyWith<$Res> get subheader;
   $DefalutValueWrapperCopyWith<$Res> get header;
-  $BarcodeCopyWith<$Res> get barcode;
+  $BarcodeCopyWith<$Res>? get barcode;
   $HeroImageCopyWith<$Res> get heroImage;
 }
 
@@ -87,7 +87,7 @@ class _$WalletPassCopyWithImpl<$Res, $Val extends WalletPass>
     Object? cardTitle = null,
     Object? subheader = null,
     Object? header = null,
-    Object? barcode = null,
+    Object? barcode = freezed,
     Object? heroImage = null,
     Object? textModulesData = null,
   }) {
@@ -124,10 +124,10 @@ class _$WalletPassCopyWithImpl<$Res, $Val extends WalletPass>
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
               as DefalutValueWrapper,
-      barcode: null == barcode
+      barcode: freezed == barcode
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
-              as Barcode,
+              as Barcode?,
       heroImage: null == heroImage
           ? _value.heroImage
           : heroImage // ignore: cast_nullable_to_non_nullable
@@ -173,8 +173,12 @@ class _$WalletPassCopyWithImpl<$Res, $Val extends WalletPass>
 
   @override
   @pragma('vm:prefer-inline')
-  $BarcodeCopyWith<$Res> get barcode {
-    return $BarcodeCopyWith<$Res>(_value.barcode, (value) {
+  $BarcodeCopyWith<$Res>? get barcode {
+    if (_value.barcode == null) {
+      return null;
+    }
+
+    return $BarcodeCopyWith<$Res>(_value.barcode!, (value) {
       return _then(_value.copyWith(barcode: value) as $Val);
     });
   }
@@ -205,7 +209,7 @@ abstract class _$$WalletPassImplCopyWith<$Res>
       DefalutValueWrapper cardTitle,
       DefalutValueWrapper subheader,
       DefalutValueWrapper header,
-      Barcode barcode,
+      Barcode? barcode,
       HeroImage heroImage,
       List<TextModulesData> textModulesData});
 
@@ -218,7 +222,7 @@ abstract class _$$WalletPassImplCopyWith<$Res>
   @override
   $DefalutValueWrapperCopyWith<$Res> get header;
   @override
-  $BarcodeCopyWith<$Res> get barcode;
+  $BarcodeCopyWith<$Res>? get barcode;
   @override
   $HeroImageCopyWith<$Res> get heroImage;
 }
@@ -242,7 +246,7 @@ class __$$WalletPassImplCopyWithImpl<$Res>
     Object? cardTitle = null,
     Object? subheader = null,
     Object? header = null,
-    Object? barcode = null,
+    Object? barcode = freezed,
     Object? heroImage = null,
     Object? textModulesData = null,
   }) {
@@ -279,10 +283,10 @@ class __$$WalletPassImplCopyWithImpl<$Res>
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
               as DefalutValueWrapper,
-      barcode: null == barcode
+      barcode: freezed == barcode
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
-              as Barcode,
+              as Barcode?,
       heroImage: null == heroImage
           ? _value.heroImage
           : heroImage // ignore: cast_nullable_to_non_nullable
@@ -310,8 +314,7 @@ class _$WalletPassImpl implements _WalletPass {
           const Subheader(defaultValue: DefaultValue(value: 'Save the earth!')),
       this.header = const Header(
           defaultValue: DefaultValue(value: 'Global Gamers Challenge!!')),
-      this.barcode =
-          const Barcode(value: '3388000000022312255.codelab_object3'),
+      this.barcode,
       this.heroImage = const HeroImage(),
       final List<TextModulesData> textModulesData = const [
         TextModulesData(header: 'POINTS', body: '1234', id: 'points'),
@@ -347,8 +350,7 @@ class _$WalletPassImpl implements _WalletPass {
   @JsonKey()
   final DefalutValueWrapper header;
   @override
-  @JsonKey()
-  final Barcode barcode;
+  final Barcode? barcode;
   @override
   @JsonKey()
   final HeroImage heroImage;
@@ -430,7 +432,7 @@ abstract class _WalletPass implements WalletPass {
       final DefalutValueWrapper cardTitle,
       final DefalutValueWrapper subheader,
       final DefalutValueWrapper header,
-      final Barcode barcode,
+      final Barcode? barcode,
       final HeroImage heroImage,
       final List<TextModulesData> textModulesData}) = _$WalletPassImpl;
 
@@ -454,7 +456,7 @@ abstract class _WalletPass implements WalletPass {
   @override
   DefalutValueWrapper get header;
   @override
-  Barcode get barcode;
+  Barcode? get barcode;
   @override
   HeroImage get heroImage;
   @override

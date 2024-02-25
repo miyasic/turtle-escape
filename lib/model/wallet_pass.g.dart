@@ -31,7 +31,7 @@ _$WalletPassImpl _$$WalletPassImplFromJson(Map<String, dynamic> json) =>
           : DefalutValueWrapper.fromJson(
               json['header'] as Map<String, dynamic>),
       barcode: json['barcode'] == null
-          ? const Barcode(value: '3388000000022312255.codelab_object3')
+          ? null
           : Barcode.fromJson(json['barcode'] as Map<String, dynamic>),
       heroImage: json['heroImage'] == null
           ? const HeroImage()

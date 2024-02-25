@@ -29,8 +29,7 @@ class WalletPass with _$WalletPass {
       ),
     )
     Header header,
-    @Default(Barcode(value: '3388000000022312255.codelab_object3'))
-    Barcode barcode,
+    Barcode? barcode,
     @Default(HeroImage()) HeroImage heroImage,
     @Default([
       TextModulesData(header: 'POINTS', body: '1234', id: 'points'),
