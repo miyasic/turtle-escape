@@ -57,7 +57,7 @@ class _GameAppState extends State<GameApp> {
                           subtitle: '画面タップで再挑戦！',
                           hiScores: game.highScores.value,
                           child: GoogleWalletButton(
-                            score: game.score.value.toString(),
+                            score: game.score.value,
                           ),
                         ),
                   },

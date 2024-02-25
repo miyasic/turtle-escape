@@ -31,7 +31,7 @@ _$WalletPassImpl _$$WalletPassImplFromJson(Map<String, dynamic> json) =>
           : DefalutValueWrapper.fromJson(
               json['header'] as Map<String, dynamic>),
       barcode: json['barcode'] == null
-          ? const Barcode(value: '3388000000022312255.codelab_object3')
+          ? null
           : Barcode.fromJson(json['barcode'] as Map<String, dynamic>),
       heroImage: json['heroImage'] == null
           ? const HeroImage()
@@ -64,7 +64,7 @@ _$LogoImpl _$$LogoImplFromJson(Map<String, dynamic> json) => _$LogoImpl(
       sourceUri: json['sourceUri'] == null
           ? const SourceUri(
               uri:
-                  'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg')
+                  'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true')
           : SourceUri.fromJson(json['sourceUri'] as Map<String, dynamic>),
     );
 

@@ -4,6 +4,7 @@ import 'package:ggc/constants/values.dart';
 import 'package:ggc/model/wallet_pass.dart';
 import 'package:ggc/provider/google_wallet.dart';
 import 'package:ggc/provider/google_wallet_pass_repository.dart';
+import 'package:ggc/util/format_duration.dart';
 import 'package:ggc/util/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -12,7 +13,7 @@ import '../../gen/assets.gen.dart';
 
 class GoogleWalletButton extends ConsumerWidget {
   const GoogleWalletButton({required this.score, super.key});
-  final String score;
+  final int score;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final googleWallet = ref.watch(googleWalletProvider);
@@ -43,18 +44,46 @@ class GoogleWalletButton extends ConsumerWidget {
     final uuid = const Uuid().v4();
     final id = '$issureId.$uuid';
     const classId = '$issureId.$className';
-    final cardTitle =
-        DefalutValueWrapper.defaultValue(value: 'Your score is $score');
-    const colorCode = '#00ffff';
-    final heroImage = HeroImage.fromUri(imageUrl);
-    final barcode = Barcode.qrCode(value: siteUrl);
+    final cardTitle = DefalutValueWrapper.defaultValue(
+      value: '今回のスコアは ${formatDuration(score)} 秒',
+    );
+    final subheader = DefalutValueWrapper.defaultValue(value: subHeader);
+    final header = DefalutValueWrapper.defaultValue(value: _header);
+    final heroImage = _heroImage;
     return WalletPass(
       cardTitle: cardTitle,
       id: id,
       classId: classId,
-      hexBackgroundColor: colorCode,
+      hexBackgroundColor: _colorCode,
       heroImage: heroImage,
-      barcode: barcode,
+      subheader: subheader,
+      header: header,
     );
   }
+
+  String get _header {
+    return switch (_scoreClass) {
+      ScoreClass.a => headerA,
+      ScoreClass.b => headerB,
+      ScoreClass.c => headerC,
+    };
+  }
+
+  HeroImage get _heroImage {
+    return switch (_scoreClass) {
+      ScoreClass.a => HeroImage.fromUri(imageUrlA),
+      ScoreClass.b => HeroImage.fromUri(imageUrlB),
+      ScoreClass.c => HeroImage.fromUri(imageUrlC),
+    };
+  }
+
+  String get _colorCode {
+    return switch (_scoreClass) {
+      ScoreClass.a => colorA,
+      ScoreClass.b => colorB,
+      ScoreClass.c => colorC,
+    };
+  }
+
+  ScoreClass get _scoreClass => ScoreClass.fromInt(score);
 }

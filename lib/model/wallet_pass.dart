@@ -29,8 +29,7 @@ class WalletPass with _$WalletPass {
       ),
     )
     Header header,
-    @Default(Barcode(value: '3388000000022312255.codelab_object3'))
-    Barcode barcode,
+    Barcode? barcode,
     @Default(HeroImage()) HeroImage heroImage,
     @Default([
       TextModulesData(header: 'POINTS', body: '1234', id: 'points'),
@@ -49,7 +48,7 @@ class Logo with _$Logo {
     @Default(
       SourceUri(
         uri:
-            'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg',
+            'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true',
       ),
     )
     SourceUri sourceUri,
