@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ggc/constants/values.dart';
 import 'package:ggc/util/format_duration.dart';
 
 class ScoreCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class ScoreCard extends StatelessWidget {
       valueListenable: score,
       builder: (context, score, child) {
         final formatted = formatDuration(score);
+        final rank = ScoreClass.fromInt(score);
         return DecoratedBox(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -42,6 +44,12 @@ class ScoreCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
+                score != 0
+                    ? Text(
+                        rank.rankText,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      )
+                    : const SizedBox.shrink(),
               ],
             ),
           ),
