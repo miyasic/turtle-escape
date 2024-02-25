@@ -3,14 +3,14 @@ const imageUrl = 'https://picsum.photos/600/200';
 const siteUrl = 'https://www.unicef.or.jp/kodomo/sdgs/17goals/14-sea/';
 const className = 'codelab_class2';
 
-const subHeader = '地球を守ろう！';
+const subHeader = '🌏地球を守ろう！';
 
 const thresholdB = 5;
 const thresholdA = 10;
 
-const headerC = '海に出たプラスチックが海洋生物を苦しめているよ。';
-const headerB = '海洋プラスチックは年間800万トンとも言われているよ。';
-const headerA = 'まずはできることから始めよう。';
+const headerC = '🌊海に出たプラスチックが海洋生物🐬を苦しめているよ。';
+const headerB = '🌊海洋プラスチックは年間800万トンとも言われているよ。😵‍💫';
+const headerA = '💪まずはできることから始めよう。♻️';
 
 const imageUrlC =
     'https://fastly.picsum.photos/id/187/600/200.jpg?hmac=5aQBl6z0Z9YzxBHYLumsMfRYbT0Ab9WTDZA6fbHLIc4';
