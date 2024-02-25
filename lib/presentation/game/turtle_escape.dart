@@ -67,9 +67,6 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
     // ハイスコアを取得
     final hiScores = SharedPreferencesService().getRanking();
     highScores.value.addAll(hiScores);
-
-    // デバッグモードを有効にする
-    debugMode = true;
   }
 
   void startGame() {
