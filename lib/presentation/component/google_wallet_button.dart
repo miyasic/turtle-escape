@@ -45,27 +45,47 @@ class GoogleWalletButton extends ConsumerWidget {
     const classId = '$issureId.$className';
     final cardTitle = DefalutValueWrapper.defaultValue(value: '今回のスコアは $score');
     final subheader = DefalutValueWrapper.defaultValue(value: subHeader);
-    final header = DefalutValueWrapper.defaultValue(value: _header());
-    const colorCode = '#00ffff';
-    final heroImage = HeroImage.fromUri(imageUrl);
+    final header = DefalutValueWrapper.defaultValue(value: _header);
+    final heroImage = _heroImage;
+    final logo = Logo(
+        sourceUri: SourceUri(
+            uri:
+                'https://github.com/miyasic/ggc/blob/main/assets/images/icon-adaptive.png?raw=true'));
     return WalletPass(
       cardTitle: cardTitle,
       id: id,
       classId: classId,
-      hexBackgroundColor: colorCode,
+      hexBackgroundColor: _colorCode,
       heroImage: heroImage,
       subheader: subheader,
       header: header,
+      logo: logo,
     );
   }
 
-  String _header() {
-    if (score < 10) {
-      return headerA;
-    }
-    if (score < 20) {
-      return headerB;
-    }
-    return headerC;
+  String get _header {
+    return switch (_scoreClass) {
+      ScoreClass.a => headerA,
+      ScoreClass.b => headerB,
+      ScoreClass.c => headerC,
+    };
   }
+
+  HeroImage get _heroImage {
+    return switch (_scoreClass) {
+      ScoreClass.a => HeroImage.fromUri(imageUrlA),
+      ScoreClass.b => HeroImage.fromUri(imageUrlB),
+      ScoreClass.c => HeroImage.fromUri(imageUrlC),
+    };
+  }
+
+  String get _colorCode {
+    return switch (_scoreClass) {
+      ScoreClass.a => colorA,
+      ScoreClass.b => colorB,
+      ScoreClass.c => colorC,
+    };
+  }
+
+  ScoreClass get _scoreClass => ScoreClass.fromInt(score);
 }
