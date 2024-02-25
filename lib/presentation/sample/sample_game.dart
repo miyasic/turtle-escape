@@ -7,6 +7,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ggc/presentation/components/play_area.dart';
 import 'package:ggc/presentation/components/sea_turtle.dart';
 import 'package:ggc/presentation/components/trash/bottle.dart';
@@ -100,6 +101,7 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
 
   void addTrash() {
     score.value += 1;
+    HapticFeedback.heavyImpact();
 
     switch (rand.nextInt(3)) {
       // 0: bottle, 1: straw, 2: plastic_bag
