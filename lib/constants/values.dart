@@ -38,4 +38,12 @@ enum ScoreClass {
     }
     return ScoreClass.c;
   }
+
+  String get rankText {
+    return switch (this) {
+      a => 'ランクA',
+      b => 'ランクB',
+      c => 'ランクC',
+    };
+  }
 }
