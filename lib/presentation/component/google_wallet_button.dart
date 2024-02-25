@@ -12,7 +12,7 @@ import '../../gen/assets.gen.dart';
 
 class GoogleWalletButton extends ConsumerWidget {
   const GoogleWalletButton({required this.score, super.key});
-  final String score;
+  final int score;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final googleWallet = ref.watch(googleWalletProvider);
@@ -43,8 +43,9 @@ class GoogleWalletButton extends ConsumerWidget {
     final uuid = const Uuid().v4();
     final id = '$issureId.$uuid';
     const classId = '$issureId.$className';
-    final cardTitle =
-        DefalutValueWrapper.defaultValue(value: 'Your score is $score');
+    final cardTitle = DefalutValueWrapper.defaultValue(value: '今回のスコアは $score');
+    final subheader = DefalutValueWrapper.defaultValue(value: subHeader);
+    final header = DefalutValueWrapper.defaultValue(value: _header());
     const colorCode = '#00ffff';
     final heroImage = HeroImage.fromUri(imageUrl);
     return WalletPass(
@@ -53,6 +54,18 @@ class GoogleWalletButton extends ConsumerWidget {
       classId: classId,
       hexBackgroundColor: colorCode,
       heroImage: heroImage,
+      subheader: subheader,
+      header: header,
     );
+  }
+
+  String _header() {
+    if (score < 10) {
+      return headerA;
+    }
+    if (score < 20) {
+      return headerB;
+    }
+    return headerC;
   }
 }
