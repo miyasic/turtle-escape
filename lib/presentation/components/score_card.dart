@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ggc/constants/values.dart';
-import 'package:ggc/presentation/game/turtle_escape.dart';
 import 'package:ggc/util/format_duration.dart';
 
 class ScoreCard extends StatelessWidget {
