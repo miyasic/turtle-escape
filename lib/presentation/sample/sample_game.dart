@@ -26,8 +26,7 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
   double get height => size.y;
 
   // ハイスコア　3位までを保存するリスト
-  final ValueNotifier<List<(int seconds, bool newRecord, String createdAt)>>
-      highScores = ValueNotifier([]);
+  final ValueNotifier<List<Score>> highScores = ValueNotifier([]);
 
   late PlayState _playState;
   PlayState get playState => _playState;
@@ -154,8 +153,18 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
       return;
     }
 
+    if (tempScores.isEmpty) {
+      tempScores
+          .add((score.value, true, true, DateTime.now().toLocal().toString()));
+    } else if (tempScores.first.$1 < score.value) {
+      tempScores
+          .add((score.value, true, true, DateTime.now().toLocal().toString()));
+    } else {
+      tempScores
+          .add((score.value, false, true, DateTime.now().toLocal().toString()));
+    }
+
     tempScores
-      ..add((score.value, true, DateTime.now().toLocal().toString()))
       ..sort((a, b) => a.$1.compareTo(b.$1))
       ..reverse();
     if (tempScores.length > 3) {
@@ -167,9 +176,9 @@ class SampleGame extends FlameGame with HasCollisionDetection, TapDetector {
 
   Future<void> removeNewRecordsFromHighScores() async {
     // scoreのnewRecordをfalseにする
-    final tempHighScores = <(int seconds, bool newRecord, String createdAt)>[];
+    final tempHighScores = <Score>[];
     for (final element in highScores.value) {
-      tempHighScores.add((element.$1, false, element.$3));
+      tempHighScores.add((element.$1, false, false, element.$4));
     }
     highScores.value = tempHighScores;
     await SharedPreferencesService().saveRanking(tempHighScores);

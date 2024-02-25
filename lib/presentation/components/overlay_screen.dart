@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:ggc/services/shared_preferences_service.dart';
 import 'package:ggc/util/format_duration.dart';
 
 class OverlayScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class OverlayScreen extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? child;
-  final List<(int seconds, bool newRecord, String createdAt)> hiScores;
+  final List<Score> hiScores;
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +61,12 @@ class OverlayScreen extends StatelessWidget {
                               color: Colors.yellow.shade300,
                             ),
                       ),
-                      hiScores[i].$2
+                      hiScores[i].$3
                           ? Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8),
                                 child: Text(
-                                  '✨新記録✨',
+                                  hiScores[i].$2 ? '✨新記録✨' : 'ランクイン',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge

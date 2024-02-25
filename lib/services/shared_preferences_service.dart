@@ -7,6 +7,8 @@ enum SharedPreferencesKey {
   ;
 }
 
+typedef Score = (int seconds, bool newRecord, bool rankedIn, String createdAt);
+
 class SharedPreferencesService {
   factory SharedPreferencesService() {
     return _instance;
@@ -21,7 +23,7 @@ class SharedPreferencesService {
     _preferences ??= await SharedPreferences.getInstance();
   }
 
-  List<(int seconds, bool newRecord, String createdAt)> getRanking() {
+  List<Score> getRanking() {
     // 保存されたJSON文字列を取得
     final jsonString =
         _preferences?.getStringList(SharedPreferencesKey.ranking.name) ?? [];
@@ -32,19 +34,25 @@ class SharedPreferencesService {
       return (
         decoded['seconds'] as int,
         decoded['newRecord'] as bool,
+        decoded['rankedIn'] as bool,
         decoded['createdAt'] as String
       );
     }).toList();
   }
 
   Future<void> saveRanking(
-    List<(int seconds, bool newRecord, String createdAt)> data,
+    List<Score> data,
   ) async {
     // データをJSON文字列に変換
     final rankingDataList = data
         .map(
           (e) => jsonEncode(
-            {'seconds': e.$1, 'newRecord': e.$2, 'createdAt': e.$3},
+            {
+              'seconds': e.$1,
+              'newRecord': e.$2,
+              'rankedIn': e.$3,
+              'createdAt': e.$3,
+            },
           ),
         )
         .toList();
