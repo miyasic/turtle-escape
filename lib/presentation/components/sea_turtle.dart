@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:ggc/presentation/components/trash/bottle.dart';
 import 'package:ggc/presentation/components/trash/plastic_bag.dart';
 import 'package:ggc/presentation/components/trash/straw.dart';
-import 'package:ggc/presentation/sample/sample_game.dart';
+import 'package:ggc/presentation/game/turtle_escape.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:vibration/vibration.dart';
 
@@ -14,7 +14,7 @@ import 'package:vibration/vibration.dart';
 // CollisionCallbacks = 衝突時のコールバックを受け取る
 // HasGameReference = ゲームの参照
 class SeaTurtle extends SpriteComponent
-    with CollisionCallbacks, HasGameReference<SampleGame> {
+    with CollisionCallbacks, HasGameReference<TurtleEscape> {
   SeaTurtle()
       : super(
           size: Vector2(48, 60),
@@ -85,6 +85,8 @@ class SeaTurtle extends SpriteComponent
       game.world.removeAll(game.world.children.query<Bottle>());
       game.world.removeAll(game.world.children.query<Straw>());
       game.world.removeAll(game.world.children.query<PlasticBag>());
+
+      game.setScore();
     }
   }
 
