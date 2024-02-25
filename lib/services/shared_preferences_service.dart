@@ -28,7 +28,7 @@ class SharedPreferencesService {
 
     // JSON文字列をデコードしてリストに変換
     return jsonString.map((e) {
-      final decoded = jsonDecode(e);
+      final decoded = jsonDecode(e) as Map<String, dynamic>;
       return (
         decoded['seconds'] as int,
         decoded['newRecord'] as bool,
