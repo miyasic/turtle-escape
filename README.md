@@ -27,7 +27,7 @@ To get started with Turtle Scape, follow these simple steps:
 
 ## Project for GlobalGamersChallenge 2024
 
-Turtle Scape is proudly participating in the 2024 GlobalGamersChallenge, a competition that celebrates innovative gaming projects worldwide. We're excited to showcase our commitment to combining entertainment with environmental education.
+Turtle Scape is proudly participating in the 2024 [GlobalGamersChallenge](https://globalgamers.devpost.com/), a competition that celebrates innovative gaming projects worldwide. We're excited to showcase our commitment to combining entertainment with environmental education.
 
 We hope you enjoy helping the turtle navigate through the dangers of ocean pollution as much as we enjoyed creating it. Together, we can make a difference in the fight against ocean pollution. Happy gaming!
 
