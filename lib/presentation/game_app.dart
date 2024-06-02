@@ -1,6 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:ggc/presentation/component/google_wallet_button.dart';
+import 'package:ggc/presentation/component/privacy_policy_button.dart';
 import 'package:ggc/presentation/components/overlay_screen.dart';
 import 'package:ggc/presentation/components/score_card.dart';
 import 'package:ggc/presentation/game/turtle_escape.dart';
@@ -49,6 +51,7 @@ class _GameAppState extends State<GameApp> {
                           title: '画面タップでゲーム開始',
                           subtitle: 'スマホを傾けてカメを動かそう！',
                           hiScores: game.highScores.value,
+                          child: const PrivacyPolicyButton(),
                         ),
 
                     PlayState.gameOver.name: (context, TurtleEscape game) =>
@@ -56,8 +59,14 @@ class _GameAppState extends State<GameApp> {
                           title: 'ゲームオーバー',
                           subtitle: '画面タップで再挑戦！',
                           hiScores: game.highScores.value,
-                          child: GoogleWalletButton(
-                            score: game.score.value,
+                          child: Column(
+                            children: [
+                              GoogleWalletButton(
+                                score: game.score.value,
+                              ),
+                              const Gap(8),
+                              const PrivacyPolicyButton(),
+                            ],
                           ),
                         ),
                   },
