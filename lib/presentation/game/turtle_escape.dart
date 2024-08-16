@@ -7,6 +7,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
+import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ggc/presentation/components/play_area.dart';
@@ -17,6 +18,8 @@ import 'package:ggc/presentation/components/trash/straw.dart';
 import 'package:ggc/services/shared_preferences_service.dart';
 
 enum PlayState { welcome, playing, gameOver }
+
+late JoystickComponent joystick;
 
 class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
   TurtleEscape() : super();
@@ -40,6 +43,7 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
         world.removeAll(world.children.query<Straw>());
         world.removeAll(world.children.query<PlasticBag>());
         world.removeAll(world.children.query<TimerComponent>());
+
         overlays.add(playState.name);
       case PlayState.playing:
         overlays.remove(PlayState.welcome.name);
@@ -67,6 +71,20 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
     // ハイスコアを取得
     final hiScores = SharedPreferencesService().getRanking();
     highScores.value.addAll(hiScores);
+
+    joystick = JoystickComponent(
+      knob: CircleComponent(radius: 20, paint: BasicPalette.white.paint()),
+      background: CircleComponent(
+        radius: 45,
+        paint: BasicPalette.white.withAlpha(100).paint(),
+      ),
+      margin: const EdgeInsets.only(
+        bottom: 36,
+        right: 36,
+      ),
+    );
+
+    camera.viewport.add(joystick);
   }
 
   void startGame() {
@@ -82,7 +100,7 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
     playState = PlayState.playing;
     score.value = 0;
 
-    final seaTurtle = SeaTurtle()
+    final seaTurtle = SeaTurtle(joystick)
       ..position = size / 2 // PlayAreaの中心
       ..anchor = Anchor.center
       ..velocity = Vector2(0, 0); // 初期速度を設定
