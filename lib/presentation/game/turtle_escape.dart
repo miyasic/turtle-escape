@@ -55,6 +55,9 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
   FutureOr<void> onLoad() async {
     super.onLoad();
 
+    // デバッグモードを有効にする
+    debugMode = true;
+
     // デバイスの画面サイズを取得
     final screenSize = size;
 
@@ -63,15 +66,7 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
-    // worldはゲーム画面のこと
-    world.add(PlayArea());
-
-    playState = PlayState.welcome;
-
-    // ハイスコアを取得
-    final hiScores = SharedPreferencesService().getRanking();
-    highScores.value.addAll(hiScores);
-
+    // ジョイスティックを作成
     joystick = JoystickComponent(
       knob: CircleComponent(radius: 20, paint: BasicPalette.white.paint()),
       background: CircleComponent(
@@ -84,7 +79,17 @@ class TurtleEscape extends FlameGame with HasCollisionDetection, TapDetector {
       ),
     );
 
+    // ジョイスティックはゲーム上ではなく、カメラに追加する
     camera.viewport.add(joystick);
+
+    // worldはゲーム画面のこと
+    world.add(PlayArea());
+
+    playState = PlayState.welcome;
+
+    // ハイスコアを取得
+    final hiScores = SharedPreferencesService().getRanking();
+    highScores.value.addAll(hiScores);
   }
 
   void startGame() {
